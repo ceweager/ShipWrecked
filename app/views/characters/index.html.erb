@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="category justify-content-between">
+        <h2>all characters</h2>
+        <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe, new_user_character_path %></h2>
+      </div>
+  <% @characters.each do |character|%>
+    <div class="card">
+      <%= link_to character.name, user_character_path(@user, character) %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,4 @@
+<%= simple_form_for([@thread, @connect]) do |f|%>
+  <%= f.input :relationship_id, collection: @relationships, label_method: :relation_name %>
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  thread_name: MyString
+  thread_status: MyString
+  milestone: one
+  thread_detail: MyText
+  thread_link: MyString
+
+two:
+  thread_name: MyString
+  thread_status: MyString
+  milestone: two
+  thread_detail: MyText
+  thread_link: MyString

@@ -1,0 +1,9 @@
+<div class="container">
+  <%= simple_form_for([@character, @relationship]) do |f| %>
+    <%= f.input :relation_name %>
+    <%= f.input :relation_status %>
+    <%= f.input :relation_detail %>
+    <%= f.input :relation_pic %>
+    <%= f.submit %>
+  <% end %>
+</div>

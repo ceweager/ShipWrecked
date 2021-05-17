@@ -1,0 +1,65 @@
+    <div class="personality">
+      <div class="category justify-content-between">
+        <h2>personality</h2>
+        <h2><%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_personality_user_character_path(@user, @character) %></h2>
+      </div>
+      <div class="content">
+        <div class="personality-leftbox">
+            <h4>postives</h4>
+            <p><%= @character.positive %></p>
+            <h4>negatives</h4>
+            <p><%= @character.negative %></p>
+        </div>
+        <div class="personality-rightbox">
+          <% paragraphs = @character.personality.lines %>
+          <% paragraphs.each do |paragraph| %>
+             <p><%= paragraph %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="relationships">
+      <div class="category justify-content-between">
+        <h2>relationships</h2>
+        <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_relationship_path(@character) %></h2>
+      </div>
+      <div class="content horizontal-cards">
+        <% @character.relationships.each do |relationship| %>	    
+            <div class="square-card">
+              <%= image_tag relationship.relation_pic, alt: "isana", class: "card-image" %>
+              <div class="card-body">
+                <h3 style="align-self:center;"><%= relationship.relation_name %></h3>
+                <h5><%= relationship.relation_status %></h5>
+                <p style="font-size: 14px">since <%= relationship.created_at %></p>
+                <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_relationship_path(@character, relationship.id), class: "edit-button"  %>
+              </div>
+            
+            </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="history">
+      <div class="category justify-content-between">
+        <h2>history</h2>
+        <h2><%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_history_user_character_path(@user, @character) %></h2>
+      </div>
+      <div class="content full-box">
+        <% paragraphs = @character.history.lines %>
+          <% paragraphs.each do |paragraph| %>
+             <p><%= paragraph %></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="overview">
+      <div class="category justify-content-between">
+        <h2>other</h2>
+        <h2><%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_other_user_character_path(@user, @character) %></h2>
+      </div>
+      <div class="content full-box" style ="height: 150px;">
+        <% paragraphs = @character.other.lines %>
+          <% paragraphs.each do |paragraph| %>
+             <p><%= paragraph %></p>
+          <% end %>
+      </div>
+    </div>

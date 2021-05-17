@@ -1,0 +1,10 @@
+<div class="container">
+  <%= simple_form_for([@character, @postthread]) do |f| %>
+    <%= f.input :thread_name %>
+    <%= f.input :thread_status, collection: @statuses %>
+    <%= f.input :thread_detail %>
+    <%= f.input :thread_link %>
+    <%= f.association :milestone, collection: @milestones, label_method: :milestone_name %>
+    <%= f.submit %>
+  <% end %>
+</div>

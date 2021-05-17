@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  relation_name: MyString
+  relation_status: MyString
+  relation_detail: MyText
+  character: one
+
+two:
+  relation_name: MyString
+  relation_status: MyString
+  relation_detail: MyText
+  character: two

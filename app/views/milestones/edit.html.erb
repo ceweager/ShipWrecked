@@ -1,0 +1,13 @@
+<div class="container">
+  <%= simple_form_for([@character, @milestone]) do |f| %>
+    <%= f.input :milestone_name %>
+    <%= f.input :model_overview %>
+    <%= f.input :milestone_pic_url %>
+    <%= f.association :goal, collection: @goals, label_method: :goal_name %>
+    <%= f.submit %>
+    <%= link_to "Delete",
+        milestone_path(@milestone),
+        method: :delete,
+        data: { confirm: "Are you sure? This will delete all associated threads" } %>
+  <% end %>
+</div>

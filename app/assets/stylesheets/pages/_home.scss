@@ -1,0 +1,19 @@
+// Specific CSS for your home-page
+.flexbox{
+  min-height: 100vh;
+  position:relative;
+  display:flex;
+  overflow: scroll;
+}
+
+.view{
+  background-color: $whitepurple;
+  flex-grow:1;
+  padding: 50px;
+}
+
+.inactive{
+  display:none;
+  transition: 1s ease-in-out;
+}
+

@@ -1,0 +1,89 @@
+<div class="category justify-content-between">
+  <h2>goals (<%= @goals.count %>)</h2>
+  <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_goal_path(@character) %></h2>
+</div>
+
+<div class="content">
+  <div class="goals-leftbox">
+    <% @character.goals.each do |goal| %>
+      <div class="goal-card">
+        <div class="goalcard-left">
+          <h3><%= goal.goal_name %></h3>
+        </div>
+        <h4><%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe,  edit_character_goal_path(@character, goal.id) %></h4>
+      </div>
+    <% end %>
+  </div>
+  <div class="goals-rightbox">
+    <div class="piechartbox">
+      <div class="pie"><%= (@percent_complete * 100) - 0.01 %></div>
+      <h3><%= @completed_threads %> threads completed</h3>
+    </div>
+    <div class = "right-statsbox">
+      <div class="statbox">
+        <h3><%= @milestones.count %></h3>
+         <% if @milestones.count == 1 %>
+          <p>milestone</p>
+        <% else %>
+          <p>milestones</p>
+        <% end %>
+      </div>
+      <div class="statbox">
+        <h3><%= @threads.count %></h3>
+        <% if @threads.count == 1 %>
+          <p>thread</p>
+        <% else %>
+          <p>threads</p>
+        <% end %>
+      </div>
+      <div class="statbox">
+        <h3><%= @character.relationships.count %></h3>
+        <% if @character.relationships.count == 1 %>
+          <p>relationship</p>
+        <% else %>
+          <p>relationships</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="category justify-content-between">
+  <h2>threads</h2>
+  <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_postthread_path(@character) %></h2>
+</div>
+
+<div class="content thread-content" style= "max-height:600px; overflow-y:scroll;">
+  <% @threads.each do |thread| %>
+    <% unless thread.nil? %>
+      <div class="thread-card">
+        <div class="card-body">
+          <h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(@character, thread.id) %></h4>
+          <h5><%= @character.name %> with <%= thread.relationships.map(&:relation_name).join(', ') %> <%= link_to "+", new_postthread_connect_path(thread, @connect) %></h5>
+        </div>
+        <div class="card-body">
+          <h4 class="align-right"><strong><%= thread.milestone.goal.goal_name%></strong></h4>
+          <h4 class="align-right"><%= thread.milestone.milestone_name %></h4>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="category justify-content-between">
+  <h2>milestones</h2>
+  <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_milestone_path(@character) %></h2>
+</div>
+<div class="content horizontal-cards">
+  <% @milestones.each do |milestone| %>
+    <div class="square-card big-card">
+      <%= image_tag milestone.milestone_pic_url, alt: "milestone-pic", class: "card-image big-image"%>
+      <div class="card-body">
+        <h3><%= milestone.milestone_name %></h3>
+        <p><%= milestone.model_overview %></p>
+        <p>created <%=milestone.created_at  %></p>
+          <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_milestone_path(@character, milestone.id), class: "edit-button"  %>
+      </div>
+    </div>
+  <% end %>
+</div>

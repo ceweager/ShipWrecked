@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  friend: one
+  user: one
+  user_confirm: false
+  friend_confirm: false
+
+two:
+  friend: two
+  user: two
+  user_confirm: false
+  friend_confirm: false

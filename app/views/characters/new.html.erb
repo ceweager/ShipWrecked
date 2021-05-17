@@ -1,0 +1,17 @@
+<div class="container">
+	<%= simple_form_for([current_user, @character]) do |f| %>
+		<%= f.input :name %>
+		<%= f.input :age %>
+		<%= f.input :gender %>
+		<%= f.input :birthday %>
+		<%= f.input :sexuality %>
+		<%= f.input :overview %>
+		<%= f.input :positive %>
+		<%= f.input :negative %>
+		<%= f.input :personality %>
+		<%= f.input :history %>
+		<%= f.input :other %>
+		<%= f.input :character_pic %>
+		<%= f.submit %>
+	<% end %>
+</div>

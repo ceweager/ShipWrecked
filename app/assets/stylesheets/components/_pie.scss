@@ -1,0 +1,39 @@
+.piechartbox{
+  margin-right: 20px;
+  h3{
+    text-align: center;
+  }
+}
+
+.pie {
+    position: relative;
+    width: 270px;
+    line-height:270px;
+    border-radius: 50%;
+    background: $lavenderpurple;
+    background-image:
+      linear-gradient(to right, transparent 50%, $darkpurple 0);
+    color: transparent;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(.5turn); }
+  }
+  @keyframes bg {
+    50% { background: $darkpurple; }
+  }
+  
+  .pie::before {
+    content: open-quote;
+    position: absolute;
+    top: 0; left: 50%;
+    width: 50%; height: 100%;
+    border-radius: 0 100% 100% 0 / 50%;
+    background-color: inherit;
+    transform-origin: left;
+    animation: spin 50s linear infinite, bg 100s step-end infinite;
+    animation-play-state: paused;
+    animation-delay: inherit;
+  }

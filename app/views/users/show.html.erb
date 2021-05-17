@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="category justify-content-between">
+        <h2><%= @user.username %></h2>
+  </div>
+  
+  <div class="category justify-content-between">
+    <h3>Characters</h3>
+    <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe, new_user_character_path(@user) %></h2>
+  </div>
+  <% @user.characters.each do |character|%>
+    <div class="card">
+      <%= link_to character.name, user_character_path(@user, character) %>
+    </div>
+  <% end %>
+  <div class="category justify-content-between">
+    <h3>Friends</h3>
+  </div>
+  <% @friends.each do |invite| %>
+    <% if invite.friend_confirm %>
+      <div class="card">
+        <% if invite.user == @user %>
+          <%= link_to invite.friend.username, user_path(invite.friend) %>
+          <%= link_to "unfriend",
+                      friendship_invite_path(invite),
+                      method: :delete,
+                      data: { confirm: "Are you sure you want to stop being friends with #{invite.friend.username}?" } %>
+        <% else %>
+          <%= link_to invite.user.username, user_path(invite.user) %>
+          <%= link_to "unfriend",
+          friendship_invite_path(invite),
+          method: :delete,
+          data: { confirm: "Are you sure you want to stop being friends with #{invite.user.username}?" } %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if @user == current_user %>
+    <div class="category justify-content-between">
+      <h3>My friend invites</h3>
+    </div>
+    <% @unaccepted.each do |invite| %>
+        <% unless invite.friend_confirm %>
+        <div class="card">
+            <%= link_to invite.user.username, user_path(invite.user) %>
+            <%= simple_form_for([@user, invite]) do |f|%>
+            <%= f.submit %>
+            <%= link_to "delete request",
+            friendship_invite_path(invite),
+            method: :delete,
+            data: { confirm: "Are you sure you want to reject #{invite.user.username}'s invite?" } %>
+            <% end %>
+        </div>
+        <% end %>
+    <% end %>
+    <div class="category justify-content-between">
+      <h3>Pending friend invites</h3>
+    </div>
+    <% @pending.each do |invite| %>
+        <% unless invite.friend_confirm %>
+        <div class="card">
+            <%= link_to invite.friend.username, user_path(invite.friend) %>
+            <%= link_to "delete request",
+            friendship_invite_path(invite),
+            method: :delete,
+            data: { confirm: "Are you sure you want to delete your friend request to #{invite.friend.username}?" } %>
+        </div>
+        <% end %>
+    <% end %>
+  <% end %>
+</div>

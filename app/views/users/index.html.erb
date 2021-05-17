@@ -1,0 +1,23 @@
+<div class="container">
+  <%= form_tag users_path, class: "form-inline" , method: :get do%>
+    <%= text_field_tag :query, 
+      params[:query],
+      class: "form-control",
+      placeholder: "find a user"
+    %>
+    <%= submit_tag "Search" %>
+  <% end %>
+  <div class="category justify-content-between">
+        <h2>all users</h2>
+      </div>
+  <% @users.each do |user|%>
+    <div class="card">
+      <%= link_to user.username, user_path(user) %>
+      <% unless current_user.friendship_invites.find_by(friend_id: user) || user == current_user %>
+        <%= simple_form_for([user, @friendinvite]) do |f| %>
+          <%= f.submit class:'btn', value: "add to friends" %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

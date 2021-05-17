@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  milestone_name: MyString
+  model_overview: MyText
+  goal: one
+  milestone_pic_url: MyString
+
+two:
+  milestone_name: MyString
+  model_overview: MyText
+  goal: two
+  milestone_pic_url: MyString

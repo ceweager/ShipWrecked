@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="header">
+    <div class="header-leftbox">
+      <h1><%= @character.name %></h1>
+      <h5><%= @character.age %> - <%= @character.gender %> - <%= @character.birthday %> - <%= @character.sexuality %></h5>
+      <p><%= @character.overview %></p>
+    </div>
+    <div class="header-rightbox">
+      <%= image_tag @character.character_pic, alt: "pic of #{@character.name}", class: "square-image" %>
+    </div>
+  </div>
+  <div id="togglebox">
+    <label class="switch">
+      <input type="checkbox">
+      <span class="slider round"></span>
+    </label>
+  </div>
+	<div class="toggle-section">
+    <div id="toggle_one">
+	    <%= render 'charactergoal' %>
+    </div>
+    <div id="toggle_two" class="inactive">
+      <%= render 'characteroverview' %>
+    </div>
+	</div>
+</div>

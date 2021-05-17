@@ -1,0 +1,11 @@
+<div class="container">
+  <%= simple_form_for([@character, @goal]) do |f| %>
+    <%= f.input :goal_name %>
+    <%= f.input :goal_detail %>
+    <%= f.submit %>
+    <%= link_to "Delete",
+        goal_path(@goal),
+        method: :delete,
+        data: { confirm: "Are you sure? This will delete all associated milestones and threads" } %>
+  <% end %>
+</div>

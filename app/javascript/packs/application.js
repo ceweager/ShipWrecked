@@ -7,6 +7,20 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+import { pieChart, toggleCheckbox } from '../components/pie';
+import { findSortables } from '../components/sortable';
+import 'controllers'
+
+window.addEventListener('turbolinks:load', () => {
+    // Call your JS functions here
+  if (document.querySelector(".pie")){
+     pieChart();
+     toggleCheckbox();
+  }
+  if (document.querySelector(".sortable-container")){
+    findSortables();
+  }
+});
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
