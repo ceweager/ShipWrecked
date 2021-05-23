@@ -1,12 +1,12 @@
-<div class="flex-container">
-  <div class="sortable-container">
+<div data-controller = "drag-item" class="flex-container dropzone" data-drag-item-target= "user" id = "<%= params[:user_id] %>">
+  <div class="sortable-container dropzone">
 		<div class="sortable-header">
 			<h3>Not Started</h3>
 		</div>
-		<ul id ="sortable-one" data-controller ="drag-item">
+		<ul id ="sortable-one">
 			<% @postthreads.each do |thread| %>
 				<% if thread.thread_status == "Not Started" %>
-				  <li draggable="true" >
+				  <li id = "<%= thread.id  %>" draggable="true" data-drag-item-target = "postthread" data-action="dragstart->drag-item#dragstart dragover->drag-item#dragover dragenter->drag-item#dragenter dragleave->drag-item#dragleave dragend->drag-item#dragend">
 						<div class="thread-card small-width">
 							<div class="card-body small-body">
 								<h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(thread.milestone.goal.character, thread.id) %></h4>
@@ -22,14 +22,14 @@
 			<% end %>
 		</ul>
   </div>
-  <div class="sortable-container">
+  <div class="sortable-container dropzone">
 	  <div class="sortable-header">
 		  <h3>To Reply</h3>
 		</div>
-		<ul id ="sortable-two" data-controller ="drag-item">
+		<ul id ="sortable-two">
 			<% @postthreads.each do |thread| %>
 				<% if thread.thread_status == "To Reply" %>
-					<li draggable="true">
+					<li id = "<%= thread.id  %>" draggable="true" data-drag-item-url="<%= character_postthread_path(thread.milestone.goal.character, thread) %>" data-drag-item-target = "postthread" data-action="dragstart->drag-item#dragstart dragover->drag-item#dragover dragenter->drag-item#dragenter dragleave->drag-item#dragleave dragend->drag-item#dragend" >
 						<div class="thread-card small-width">
 							<div class="card-body small-body">
 								<h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(thread.milestone.goal.character, thread.id) %></h4>
@@ -45,14 +45,14 @@
 			<% end %>
 		</ul>
   </div>
-  <div class="sortable-container">
+  <div class="sortable-container dropzone">
 	  <div class="sortable-header">
-		  <h3>Waiting for reply</h3>
+		  <h3>Waiting for Reply</h3>
 		</div>
-		<ul id = "sortable-three"  data-controller ="drag-item">
+		<ul id = "sortable-three">
 			<% @postthreads.each do |thread| %>
 				<% if thread.thread_status == "Waiting for Reply" %>
-					<li draggable="true" >
+					<li id = "<%= thread.id  %>" draggable="true" data-drag-item-url="<%= character_postthread_path(thread.milestone.goal.character, thread) %>" data-action="dragstart->drag-item#dragstart dragover->drag-item#dragover dragenter->drag-item#dragenter dragleave->drag-item#dragleave dragend->drag-item#dragend">
 						<div class="thread-card small-width">
 							<div class="card-body small-body">
 								<h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(thread.milestone.goal.character, thread.id) %></h4>
@@ -68,14 +68,14 @@
 			<% end %>
 		</ul>
   </div>
-  <div class="sortable-container">
+  <div class="sortable-container dropzone">
 	  <div class="sortable-header">
 		  <h3>Completed</h3>
 		</div>
 		<ul id = "sortable-four">
 			<% @postthreads.each do |thread| %>
 				<% if thread.thread_status == "Completed" %>
-					<li draggable="true">
+					<li id = "<%= thread.id  %>" draggable="true"  data-drag-item-url="<%= character_postthread_path(thread.milestone.goal.character, thread) %>"data-action="dragstart->drag-item#dragstart dragover->drag-item#dragover dragenter->drag-item#dragenter dragleave->drag-item#dragleave dragend->drag-item#dragend">
 						<div class="thread-card small-width">
 							<div class="card-body small-body">
 								<h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(thread.milestone.goal.character, thread.id) %></h4>

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
         get :edit_other
       end
     end
-    resources :postthreads, only: [:index]
+    resources :postthreads, only: [:index, :update]
     resources :friendship_invites, only: [:new, :create, :edit, :update]
   end
 

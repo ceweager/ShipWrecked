@@ -1,7 +1,7 @@
 class PostthreadsController < ApplicationController
+  before_action :find_thread, only: [:update, :edit, :destroy]
   before_action :find_character, only: [:new, :create, :update, :edit]
   before_action :find_milestone, only: [:new, :create, :update, :edit]
-  before_action :find_thread, only: [:update, :edit, :destroy]
 
   def index
     @postthreads = Postthread.all
@@ -26,8 +26,13 @@ class PostthreadsController < ApplicationController
   end
 
   def update
-    @postthread.update(thread_params)
-    redirect_to user_character_path(current_user, @character)
+    unless thread_params["thread_status"].empty?
+      @postthread.update(thread_params)
+      respond_to do |format|
+        format.html { redirect_to referral_param}
+        format.json { render json: { postthread: @postthread } }
+      end
+    end
   end
 
   def destroy
@@ -39,7 +44,11 @@ class PostthreadsController < ApplicationController
   private
 
   def find_character
-    @character = Character.find(params[:character_id])
+    if params[:character_id].nil?
+      @character = Character.find(@postthread.milestone.goal.character_id)
+    else
+      @character = Character.find(params[:character_id])
+    end
   end
 
   def find_thread
@@ -52,5 +61,9 @@ class PostthreadsController < ApplicationController
 
   def thread_params
     params.require(:postthread).permit(:thread_name, :thread_detail, :thread_status, :thread_link, :milestone_id)
+  end
+
+  def referral_param
+    params[:referrer]
   end
 end

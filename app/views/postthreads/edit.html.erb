@@ -1,6 +1,7 @@
 <div class="container">
   <%= simple_form_for([@character, @postthread]) do |f| %>
     <%= f.input :thread_name %>
+    <%= hidden_field_tag :referrer, request.referer %>
     <%= f.input :thread_status, collection: @statuses %>
     <%= f.input :thread_detail %>
     <%= f.input :thread_link %>
