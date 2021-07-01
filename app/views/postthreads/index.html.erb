@@ -1,4 +1,5 @@
-<div class="d-flex align-items-center flex-column">
+<div class="user-profile">
+  <div class ="left-user-profile">
   <div>
 		<h1>current threads</h1>
 		<%= form_tag user_postthreads_path, class: "form-inline mb-3", method: :get do %>
@@ -101,4 +102,29 @@
 			</ul>
 		</div>
 	</div>
+	</div>
+	<div class="right-user-profile">
+    <div class="user-profile-image">
+      <div class="rank-box">
+        rank 1
+      </div>
+      <%= image_tag @user.avatar, alt: @user.username, class: "round-avatar" %>
+        <% unless current_user.friends.includes(@user) %>
+        <%= simple_form_for([@user, @friendinvite]) do |f|%>
+          <%= button_tag(type: 'submit', class:'btn-purple') do %>
+              <i class="fas fa-user-plus"></i>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="user-details">
+      <h4>Age</h4>
+      <h3><%= @user.age %></h3>
+      <h4>Pronouns</h4>
+      <h3><%= @user.pronouns %></h3>
+      <h4>Timezone</h4>
+      <h3><%= @user.timezone %></h3>
+      <h4>Preferences</h4>
+    </div>
+  </div>
 </div>

@@ -8,15 +8,32 @@
       <h3>Characters</h3>
       <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe, new_user_character_path(@user) %></h2>
     </div>
-    <div class="character-profiles">
+    <div class="character-profiles content w-100">
+      <% if @user.characters.empty? %>
+        <p>No characters yet.</p>
+        <% if current_user == @user %>
+          <p>Add some <%= link_to '<i class="fas fa-plus"></i>'.html_safe, new_user_character_path(@user) %></p>
+        <% end %>
+      <% end %>
       <% @user.characters.each do |character|%>
         <%= render 'character_card', character: character %>
       <% end %>
     </div>
     <div class="category justify-content-between">
-      <h3>Friends</h3>
+      <h3>Friends (<%= @friends.count(:friend_confirm) %>)</h3>
     </div>
     <div class="user-friend-list">
+      <% if @friends.count(:friend_confirm).zero? %>
+        <p style="display: block; width: 100%;">No friends yet! Search to add some.</p>
+         <%= form_tag users_path, class: "form-inline" , method: :get do%>
+          <%= text_field_tag :query, 
+            params[:query],
+            class: "form-control",
+            placeholder: "find a friend"
+          %>
+          <%= submit_tag "Search", class: "btn dark-button" %>
+        <% end %>
+      <% end %>
       <% @friends.each do |invite| %>
         <%= render 'friend_card', invite: invite %>
       <% end %>
@@ -39,12 +56,24 @@
       <% if @user == current_user %>
         <div class="category mr-3" style="flex-direction:column; flex-wrap:wrap; width: 49%;">
           <h3>Received friend invites</h3>
+          <% if @unaccepted.empty? %>
+          <p>
+            You have received no friend requests.<br>
+            Tell your friends to use SHIPWRECKED.
+          </p>
+          <% end %>
           <% @unaccepted.each do |invite| %>
             <%= render 'unaccepted_card', invite: invite %>
           <% end %>
          </div>
         <div class="category" style="flex-direction:column; flex-wrap:wrap; width: 49%;">
           <h3>Pending friend invites</h3>
+          <% if @pending.empty? %>
+            <p>
+              You have sent no friend requests.<br>
+              <%= link_to "Search for a friend?", users_path %>
+            </p>
+          <% end %>
           <% @pending.each do |invite| %>
               <% unless invite.friend_confirm %>
               <div class="card d-flex" style = "flex-direction:row; border-radius:35px;">

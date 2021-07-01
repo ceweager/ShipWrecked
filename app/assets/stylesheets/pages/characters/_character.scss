@@ -2,11 +2,13 @@
   display: flex;
 }
 
-.header-leftbox{
-	flex-grow: 1;
+.character-right{
+	text-align: center;
+	position:relative;
+	top: -20px;
 	h1{
 	  text-transform:uppercase;
-      font-size: 64px;
+    font-size: 48px;
 	}
 
 	h5{
@@ -18,11 +20,12 @@
 		font-size: 18px;
 	}
 }
+
 .square-image{
   width: 300px;
   height: 300px;
   object-fit: cover;
-	border-radius: 20px;
+	border-radius: 50%;
 	border: 4px solid $lavenderpurple;
 }
 
@@ -33,6 +36,23 @@
   h2{
 		display: inline-block;
 	}
+	p{
+		display:inline-block;
+		background-color: $lightpurple;
+		padding: 15px 30px;
+		border-radius: 40px;
+		margin: 0;
+	}
+	a{
+		color: $darkpurple;
+		font-weight: bolder;
+	}
+}
+
+.toggle-section{
+	position:relative;
+	top: -20px;
+	width: 1170px;
 }
 
 .content{
@@ -44,7 +64,7 @@
 		padding: 30px;
 		background-image: linear-gradient($darkpurple, $lavenderpurple);
 		width: 270px;
-		height: 380px;
+		max-height: 380px;
 		border-radius: 20px;
 		margin-right: 40px;
 		color: $lightpurple;
@@ -55,9 +75,9 @@
 		padding: 30px 40px;
 		background-color: $lightpurple;
 		width: 800px;
-		height: 380px;
+		max-height: 380px;
 		border-radius: 20px;
-		overflow-y: scroll;
+		overflow-y: auto;
 	}
 }
 
@@ -124,10 +144,10 @@
 	box-sizing: border-box;
 	padding: 30px 40px;
 	background-color: $lightpurple;
-	height: 400px;
+	max-height: 400px;
 	width: 100%;
 	border-radius: 20px;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .goals-leftbox{
@@ -176,6 +196,8 @@
 
 .thread-content{
   flex-wrap: wrap;
+	max-height: 600px;
+	overflow-y:auto;
 }
 .thread-card{
   display: flex;
@@ -214,7 +236,9 @@
 
 .small-width{
   width: 300px;
+	display:flex;
   flex-wrap: wrap;
+	flex-direction: column;
   padding: 5px 10px;
   margin-bottom: 10px;
   h4{

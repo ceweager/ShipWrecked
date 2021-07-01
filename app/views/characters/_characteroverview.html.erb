@@ -30,7 +30,7 @@
               <div class="card-body">
                 <h3 style="align-self:center;"><%= relationship.relation_name %></h3>
                 <h5><%= relationship.relation_status %></h5>
-                <p style="font-size: 14px">since <%= relationship.created_at %></p>
+                <p style="font-size: 14px">since <%= relationship.created_at.strftime("%d %B %Y" ) %></p>
                 <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_relationship_path(@character, relationship.id), class: "edit-button"  %>
               </div>
             
@@ -56,7 +56,7 @@
         <h2>other</h2>
         <h2><%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_other_user_character_path(@user, @character) %></h2>
       </div>
-      <div class="content full-box" style ="height: 150px;">
+      <div class="content full-box">
         <% paragraphs = @character.other.lines %>
           <% paragraphs.each do |paragraph| %>
              <p><%= paragraph %></p>

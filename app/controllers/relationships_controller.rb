@@ -1,6 +1,6 @@
 class RelationshipsController < ApplicationController
-  before_action :find_character, only: [:new, :create, :edit, :update]
-  before_action :find_relationship, only: [:edit, :update, :destroy]
+  before_action :find_character, only: %i[new create edit update]
+  before_action :find_relationship, only: %i[edit update destroy]
   def new
     @relationship = Relationship.new
   end
@@ -15,8 +15,7 @@ class RelationshipsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @relationship.update(relationship_params)

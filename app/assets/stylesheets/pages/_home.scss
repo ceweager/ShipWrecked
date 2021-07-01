@@ -1,12 +1,16 @@
 // Specific CSS for your home-page
 
-
+.logo{
+  font-family: $logo-font;
+  font-size: 30px;
+  font-weight: 800;
+  color: $lavenderpurple;
+}
 
 .flexbox{
   min-height: 100vh;
   position:relative;
   display:flex;
-  overflow: scroll;
 }
 
 .view{

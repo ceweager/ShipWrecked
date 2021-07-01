@@ -1,18 +1,19 @@
 class PostthreadsController < ApplicationController
-  before_action :find_thread, only: [:update, :edit, :destroy]
-  before_action :find_character, only: [:new, :create, :update, :edit]
-  before_action :find_milestone, only: [:new, :create, :update, :edit]
+  before_action :find_thread, only: %i[update edit destroy]
+  before_action :find_character, only: %i[new create update edit]
+  before_action :find_milestone, only: %i[new create update edit]
   after_action :create_connects, only: [:create]
 
   def index
+    @user = User.find(params[:user_id])
     @characters = current_user.characters
-    @statuses = ["Not Started", "To Reply", "Waiting for Reply", "Completed"]
+    @statuses = ['Not Started', 'To Reply', 'Waiting for Reply', 'Completed']
     filter_threads
   end
 
   def new
     @postthread = Postthread.new
-    @statuses = ["Not Started", "To Reply", "Waiting for Reply", "Completed"]
+    @statuses = ['Not Started', 'To Reply', 'Waiting for Reply', 'Completed']
     @relations = Relationship.where(character: @character)
   end
 
@@ -26,14 +27,14 @@ class PostthreadsController < ApplicationController
   end
 
   def edit
-    @statuses = ["Not Started", "To Reply", "Waiting for Reply", "Completed"]
+    @statuses = ['Not Started', 'To Reply', 'Waiting for Reply', 'Completed']
   end
 
   def update
-    unless thread_params["thread_status"].empty?
+    unless thread_params['thread_status'].empty?
       @postthread.update(thread_params)
       respond_to do |format|
-        format.html { redirect_to referral_param}
+        format.html { redirect_to referral_param }
         format.json { render json: { postthread: @postthread } }
       end
     end
@@ -57,11 +58,11 @@ class PostthreadsController < ApplicationController
   end
 
   def find_character
-    if params[:character_id].nil?
-      @character = Character.find(@postthread.milestone.goal.character_id)
-    else
-      @character = Character.find(params[:character_id])
-    end
+    @character = if params[:character_id].nil?
+                   Character.find(@postthread.milestone.goal.character_id)
+                 else
+                   Character.find(params[:character_id])
+                 end
   end
 
   def find_thread
@@ -81,14 +82,14 @@ class PostthreadsController < ApplicationController
   end
 
   def filter_threads
-    @postthreads =  if params[:first_query].present? && params[:second_query].present?
-                      Character.find(params[:first_query]).postthreads.where(thread_status: params[:second_query])
-                    elsif params[:first_query].present?
-                      Character.find(params[:first_query]).postthreads
-                    elsif params[:second_query].present?
-                      current_user.postthreads.where(thread_status: params[:second_query])
-                    else
-                      current_user.postthreads
-                    end
+    @postthreads = if params[:first_query].present? && params[:second_query].present?
+                     Character.find(params[:first_query]).postthreads.where(thread_status: params[:second_query])
+                   elsif params[:first_query].present?
+                     Character.find(params[:first_query]).postthreads
+                   elsif params[:second_query].present?
+                     current_user.postthreads.where(thread_status: params[:second_query])
+                   else
+                     current_user.postthreads
+                   end
   end
 end

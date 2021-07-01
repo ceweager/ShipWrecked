@@ -49,11 +49,11 @@
 </div>
 
 <div class="category justify-content-between">
-  <h2>threads</h2>
+  <h2>threads (<%= @threads.count %>)</h2>
   <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_postthread_path(@character) %></h2>
 </div>
 
-<div class="content thread-content" style= "max-height:600px; overflow-y:scroll;">
+<div class="content thread-content">
   <% @threads.each do |thread| %>
     <% unless thread.nil? %>
       <div class="thread-card">
@@ -72,7 +72,7 @@
 </div>
 
 <div class="category justify-content-between">
-  <h2>milestones</h2>
+  <h2>milestones (<%= @milestones.count %>)</h2>
   <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_milestone_path(@character) %></h2>
 </div>
 <div class="content horizontal-cards">
@@ -86,7 +86,7 @@
       <div class="card-body">
         <h3><%= milestone.milestone_name %></h3>
         <h5><%= milestone.goal.goal_name %></h5>
-        <p>created <%=milestone.created_at  %></p>
+        <p>created <%=milestone.created_at.strftime("%d %B %Y" )  %></p>
           <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_milestone_path(@character, milestone.id), class: "edit-button"  %>
       </div>
     </div>
