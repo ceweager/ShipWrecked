@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container narrow-container">
   <%= form_tag users_path, class: "form-inline" , method: :get do%>
     <%= text_field_tag :query, 
       params[:query],
       class: "form-control",
       placeholder: "find a user"
     %>
-    <%= submit_tag "Search" %>
+    <%= submit_tag "Search", class: "btn dark-button" %>
   <% end %>
   <div class="category justify-content-between">
         <h2>all users</h2>

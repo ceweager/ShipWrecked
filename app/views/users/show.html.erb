@@ -1,71 +1,93 @@
-<div class="container">
-  <div class="category justify-content-between">
-        <h2><%= @user.username %></h2>
-  </div>
-  
-  <div class="category justify-content-between">
-    <h3>Characters</h3>
-    <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe, new_user_character_path(@user) %></h2>
-  </div>
-  <% @user.characters.each do |character|%>
-    <div class="card">
-      <%= link_to character.name, user_character_path(@user, character) %>
+<div class="user-profile">
+  <div class="left-user-profile">
+    <div class="category about-user-profile">
+      <h1><%= @user.username %></h1>
+      <p><%= @user.about %></p>
     </div>
-  <% end %>
-  <div class="category justify-content-between">
-    <h3>Friends</h3>
-  </div>
-  <% @friends.each do |invite| %>
-    <% if invite.friend_confirm %>
-      <div class="card">
-        <% if invite.user == @user %>
-          <%= link_to invite.friend.username, user_path(invite.friend) %>
-          <%= link_to "unfriend",
-                      friendship_invite_path(invite),
-                      method: :delete,
-                      data: { confirm: "Are you sure you want to stop being friends with #{invite.friend.username}?" } %>
-        <% else %>
-          <%= link_to invite.user.username, user_path(invite.user) %>
-          <%= link_to "unfriend",
-          friendship_invite_path(invite),
-          method: :delete,
-          data: { confirm: "Are you sure you want to stop being friends with #{invite.user.username}?" } %>
+    <div class="category justify-content-between">
+      <h3>Characters</h3>
+      <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe, new_user_character_path(@user) %></h2>
+    </div>
+    <div class="character-profiles">
+      <% @user.characters.each do |character|%>
+        <%= render 'character_card', character: character %>
+      <% end %>
+    </div>
+    <div class="category justify-content-between">
+      <h3>Friends</h3>
+    </div>
+    <div class="user-friend-list">
+      <% @friends.each do |invite| %>
+        <%= render 'friend_card', invite: invite %>
+      <% end %>
+    </div>
+    <% if current_user != @user && (@friends.find_by(user: current_user) || @friends.find_by(friend: current_user)) %>
+      <div class="category justify-content-between">
+        <h3>Plot with <%= @user.username %></h3>
+      </div>
+      <%= simple_form_for([@user, @chatroom], html: { class: "form-inline mb-3" }) do |f|%>
+        <%= f.input :name, label: false, placeholder: 'give our convo a name' %>
+        <%= f.submit  "start plotting", class: "btn dark-button" %>
+      <% end %>
+      <div class="user-profile-chat">
+        <% @chatrooms.each do |chatroom| %>
+          <%= render 'chatroom_card', chatroom: chatroom %>
         <% end %>
       </div>
     <% end %>
-  <% end %>
-
-  <% if @user == current_user %>
-    <div class="category justify-content-between">
-      <h3>My friend invites</h3>
-    </div>
-    <% @unaccepted.each do |invite| %>
-        <% unless invite.friend_confirm %>
-        <div class="card">
-            <%= link_to invite.user.username, user_path(invite.user) %>
-            <%= simple_form_for([@user, invite]) do |f|%>
-            <%= f.submit %>
-            <%= link_to "delete request",
-            friendship_invite_path(invite),
-            method: :delete,
-            data: { confirm: "Are you sure you want to reject #{invite.user.username}'s invite?" } %>
-            <% end %>
+    <div class="requests-box" style="display:flex;">
+      <% if @user == current_user %>
+        <div class="category mr-3" style="flex-direction:column; flex-wrap:wrap; width: 49%;">
+          <h3>Received friend invites</h3>
+          <% @unaccepted.each do |invite| %>
+            <%= render 'unaccepted_card', invite: invite %>
+          <% end %>
+         </div>
+        <div class="category" style="flex-direction:column; flex-wrap:wrap; width: 49%;">
+          <h3>Pending friend invites</h3>
+          <% @pending.each do |invite| %>
+              <% unless invite.friend_confirm %>
+              <div class="card d-flex" style = "flex-direction:row; border-radius:35px;">
+                  <%= image_tag invite.friend.avatar, class: "small-round-avatar" %>
+                  <div class = "d-flex justify-content-between mx-5" style ="flex-grow: 1; align-items:center;">
+                    <h3><%= link_to invite.friend.username, user_path(invite.friend) %></h3>
+                    <%= link_to '<i class="fas fa-user-times"></i>'.html_safe,
+                    friendship_invite_path(invite),
+                    method: :delete,
+                    data: { confirm: "Are you sure you want to delete your friend request to #{invite.friend.username}?" } %>
+                  </div>
+              </div>
+              <% end %>
+          <% end %>
         </div>
-        <% end %>
-    <% end %>
-    <div class="category justify-content-between">
-      <h3>Pending friend invites</h3>
+      <% end %>
     </div>
-    <% @pending.each do |invite| %>
-        <% unless invite.friend_confirm %>
-        <div class="card">
-            <%= link_to invite.friend.username, user_path(invite.friend) %>
-            <%= link_to "delete request",
-            friendship_invite_path(invite),
-            method: :delete,
-            data: { confirm: "Are you sure you want to delete your friend request to #{invite.friend.username}?" } %>
-        </div>
+  </div>
+  <div class="right-user-profile">
+    <div class="user-profile-image">
+      <div class="rank-box">
+        rank 1
+      </div>
+      <%= image_tag @user.avatar, alt: @user.username, class: "round-avatar" %>
+        <% unless current_user.friends.includes(@user) %>
+        <%= simple_form_for([@user, @friendinvite]) do |f|%>
+          <%= button_tag(type: 'submit', class:'btn-purple') do %>
+              <i class="fas fa-user-plus"></i>
+          <% end %>
         <% end %>
-    <% end %>
-  <% end %>
+      <% end %>
+    </div>
+    <div class="user-details">
+      <h4>Age</h4>
+      <h3><%= @user.age %></h3>
+      <h4>Pronouns</h4>
+      <h3><%= @user.pronouns %></h3>
+      <h4>Timezone</h4>
+      <h3><%= @user.timezone %></h3>
+      <h4>Preferences</h4>
+    </div>
+  </div>
 </div>
+
+<% unless current_user.friendship_invites.find_by(friend_id: @user) || @user.friendship_invites.find_by(friend_id: current_user) || @user = current_user%>
+<% end %>

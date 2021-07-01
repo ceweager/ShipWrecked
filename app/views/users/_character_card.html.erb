@@ -1,0 +1,8 @@
+<div class="card character-card">
+	<div class="left-character">
+			<%= image_tag character.character_pic, alt: character.name, class: "small-image" %>
+	</div>
+	<div class="right-character">
+			<%= link_to character.name, user_character_path(@user, character) %>
+	</div>
+</div>

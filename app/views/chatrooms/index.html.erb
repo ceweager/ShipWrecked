@@ -1,0 +1,8 @@
+<div class="container narrow-container mt-3">
+  <div class="user-profile-chat">
+  <h1>Plotting Dashboard</h1>
+    <% @chatrooms.each do |chatroom|%>
+      <%= render './users/chatroom_card', chatroom: chatroom %>
+    <% end %>
+  </div>
+</div>

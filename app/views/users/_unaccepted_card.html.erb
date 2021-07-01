@@ -1,0 +1,15 @@
+<% unless invite.friend_confirm %>
+	<div class="card" style="display:flex;">
+	  <%= image_tag invite.friend.avatar, class: "small-round-avatar" %>
+		<%= link_to invite.user.username, user_path(invite.user) %>
+		<%= simple_form_for([@user, invite]) do |f|%>
+			<%= button_tag(type: 'submit', style: "background-color: #FFF; border: none; color: $blue;") do %>
+					<i class="fas fa-user-check"></i>
+			<% end %>
+			<%= link_to '<i class="fas fa-user-times"></i>'.html_safe,
+					friendship_invite_path(invite),
+					method: :delete,
+					data: { confirm: "Are you sure you want to reject #{invite.user.username}'s invite?" } %>
+		<% end %>
+	</div>
+<% end %>

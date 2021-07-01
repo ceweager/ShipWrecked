@@ -2,14 +2,18 @@ class PostthreadsController < ApplicationController
   before_action :find_thread, only: [:update, :edit, :destroy]
   before_action :find_character, only: [:new, :create, :update, :edit]
   before_action :find_milestone, only: [:new, :create, :update, :edit]
+  after_action :create_connects, only: [:create]
 
   def index
-    @postthreads = Postthread.all
+    @characters = current_user.characters
+    @statuses = ["Not Started", "To Reply", "Waiting for Reply", "Completed"]
+    filter_threads
   end
 
   def new
     @postthread = Postthread.new
     @statuses = ["Not Started", "To Reply", "Waiting for Reply", "Completed"]
+    @relations = Relationship.where(character: @character)
   end
 
   def create
@@ -43,6 +47,15 @@ class PostthreadsController < ApplicationController
 
   private
 
+  def create_connects
+    @relationships = params[:postthread][:relationships].reject { |r| r.empty? }
+    @relationships.each do |relationship|
+      relation = Relationship.find(relationship)
+      connect = Connect.new(relationship: relation, postthread: @postthread)
+      connect.save
+    end
+  end
+
   def find_character
     if params[:character_id].nil?
       @character = Character.find(@postthread.milestone.goal.character_id)
@@ -65,5 +78,17 @@ class PostthreadsController < ApplicationController
 
   def referral_param
     params[:referrer]
+  end
+
+  def filter_threads
+    @postthreads =  if params[:first_query].present? && params[:second_query].present?
+                      Character.find(params[:first_query]).postthreads.where(thread_status: params[:second_query])
+                    elsif params[:first_query].present?
+                      Character.find(params[:first_query]).postthreads
+                    elsif params[:second_query].present?
+                      current_user.postthreads.where(thread_status: params[:second_query])
+                    else
+                      current_user.postthreads
+                    end
   end
 end

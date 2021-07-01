@@ -26,7 +26,7 @@
       <div class="content horizontal-cards">
         <% @character.relationships.each do |relationship| %>	    
             <div class="square-card">
-              <%= image_tag relationship.relation_pic, alt: "isana", class: "card-image" %>
+              <%= image_tag relationship.relation_pic, alt: "isana", class: "card-image", style: "object-position: center top;" %>
               <div class="card-body">
                 <h3 style="align-self:center;"><%= relationship.relation_name %></h3>
                 <h5><%= relationship.relation_status %></h5>

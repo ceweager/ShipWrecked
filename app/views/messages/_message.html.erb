@@ -1,0 +1,16 @@
+<div class="message-container" id="message-<%= message.id %>">
+  <% if message.chatroom.messages.first == message || message.chatroom.messages[-2].user != message.user %>
+    <i class="author d-flex mb-3" >
+      <%= image_tag message.user.avatar, class: "small-round-avatar", style: "height:50px;width:50px;" %>
+      <div class="d-flex flex-column justify-content-center ml-2">
+        <span><%= message.user.username %></span>
+        <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
+      </div>
+    </i>
+    <div class="message-background ml-5">
+  <% else %>
+    <div class="message-background ml-5">
+  <% end %>
+      <p><%= message.content %></p>
+    </div>
+</div>

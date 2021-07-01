@@ -1,0 +1,17 @@
+<div class="container mt-3">
+  <h1><%= @chatroom.name %></h1>
+  <% if @chatroom.user == current_user %>
+    <h5>Plotting with <%= @chatroom.partner.username.capitalize %></h5>
+  <% else %>
+    <h5>Plotting with <%= @chatroom.user.username.capitalize %></h5>
+  <% end %>
+  <div id="messages" data-chatroom-id="<%= @chatroom.id %>" class="my-3">
+    
+    <% @chatroom.messages.each do |message| %>
+      <%= render './messages/message', message: message %>
+    <% end %>
+  </div>
+  <%= simple_form_for [@chatroom, @message], remote: true do |f| %>
+    <%= f.input :content, label: false, placeholder: "Message #{@chatroom.user.username.capitalize!} to plot with them!" %>
+  <% end %>
+</div>

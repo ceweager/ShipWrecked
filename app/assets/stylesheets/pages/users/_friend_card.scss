@@ -1,0 +1,21 @@
+.user-friend-card{
+  display:flex;
+  width: 48%;
+  flex-direction: row;
+  border-radius: 40px;
+  padding: 5px;
+  margin-right: 10px;
+  box-shadow: 1px 1px 8px rgba($darkpurple, 0.5);
+}
+
+.friend-card-details{
+  h3{
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  a{
+    margin-top: 0;
+    margin-left: 18px;
+    color: $darkpurple;
+  }
+}

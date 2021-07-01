@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_16_170806) do
+ActiveRecord::Schema.define(version: 2021_05_31_190236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 2021_05_16_170806) do
     t.string "character_pic"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_characters_on_user_id"
+  end
+
+  create_table "chatrooms", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.string "partner_id"
+    t.index ["user_id"], name: "index_chatrooms_on_user_id"
   end
 
   create_table "connects", force: :cascade do |t|
@@ -60,6 +70,16 @@ ActiveRecord::Schema.define(version: 2021_05_16_170806) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["character_id"], name: "index_goals_on_character_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "content"
+    t.bigint "chatroom_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "milestones", force: :cascade do |t|
@@ -103,15 +123,24 @@ ActiveRecord::Schema.define(version: 2021_05_16_170806) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "username"
+    t.integer "age"
+    t.string "pronouns"
+    t.string "timezone"
+    t.text "about"
+    t.string "avatar"
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "characters", "users"
+  add_foreign_key "chatrooms", "users"
   add_foreign_key "connects", "postthreads"
   add_foreign_key "connects", "relationships"
   add_foreign_key "friendship_invites", "users"
   add_foreign_key "goals", "characters"
+  add_foreign_key "messages", "chatrooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "milestones", "goals"
   add_foreign_key "postthreads", "milestones"
   add_foreign_key "relationships", "characters"

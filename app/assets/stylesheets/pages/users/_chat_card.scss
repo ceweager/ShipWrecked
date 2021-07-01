@@ -1,0 +1,44 @@
+.user-profile-chat{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.user-chat-card{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  width: 96%;
+  border-radius:40px;
+  border: 2px solid $darkpurple;
+  background-image:linear-gradient(90.05deg, $lavenderpurple 19.59%, $darkpurple 66.53%);
+  box-shadow: 1px 1px 8px rgba($darkpurple, 0.5);
+}
+
+.left-profile-chat{
+  display:flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100px;
+  padding: 10px 0;
+  margin-left: 30px;
+  h3{
+    font-size: 28px;
+    margin-bottom: 0;
+    color: $lightpurple;
+  }
+  a{
+    color: $lightpurple;
+  }
+}
+
+.right-profile-chat{
+  width: 99px;
+  height: 100px;
+
+  .small-round-avatar{
+    height: 99px;
+    width: 99px;
+    border-radius: 40px 40px 40px 0;
+  }
+}

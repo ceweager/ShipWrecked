@@ -1,0 +1,23 @@
+<% if invite.friend_confirm %>
+	<div class="card user-friend-card">
+		<% if invite.user == @user %>
+			<%= image_tag invite.friend.avatar, class: "small-round-avatar" %>
+		  <div class="friend-card-details">
+				<h3><%= link_to invite.friend.username, user_path(invite.friend) %></h3>
+				<%= link_to '<i class="fas fa-user-times"></i>'.html_safe,
+										friendship_invite_path(invite),
+										method: :delete,
+										data: { confirm: "Are you sure you want to stop being friends with #{invite.friend.username}?" } %>
+			</div>
+		<% else %>
+		  <%= image_tag invite.user.avatar, class: "small-round-avatar" %>
+		  <div class="friend-card-details">
+				<h3><%= link_to invite.user.username, user_path(invite.user) %></h3>
+				<%= link_to '<i class="fas fa-user-times"></i>'.html_safe,
+						friendship_invite_path(invite),
+						method: :delete,
+						data: { confirm: "Are you sure you want to stop being friends with #{invite.user.username}?" } %>
+			</div>
+		<% end %>
+	</div>
+<% end %>

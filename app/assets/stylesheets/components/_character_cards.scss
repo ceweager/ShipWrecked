@@ -1,0 +1,44 @@
+.character-profiles{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px;
+  flex-direction: row;
+}
+
+.character-card{
+  display:flex;
+  position:relative;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px 6px rgba($darkpurple, 0.5);
+}
+.left-character{
+  .small-image{
+    height: 300px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+}
+.right-character{
+  position:absolute;
+  box-sizing: border-box;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align:center;
+  background-image: linear-gradient(to bottom, rgba($darkpurple, 0), $darkpurple);
+  height: 150px;
+  width: 100%;
+  bottom: 0;
+  border-radius: 10px;
+  a{
+    position:relative;
+    display: inline-block;
+    font-size: 26px;
+    color: $lightpurple;
+    line-height: 28px;
+    bottom: -20px;
+  }
+}

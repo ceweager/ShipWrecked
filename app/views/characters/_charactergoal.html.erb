@@ -57,7 +57,8 @@
   <% @threads.each do |thread| %>
     <% unless thread.nil? %>
       <div class="thread-card">
-        <div class="card-body">
+        <%= image_tag thread.relationships.first.relation_pic, alt: thread.relationships.first.relation_name , class: "small-round-avatar my-2", style: "object-position: center top;"%>
+        <div class="card-body my-1">
           <h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(@character, thread.id) %></h4>
           <h5><%= @character.name %> with <%= thread.relationships.map(&:relation_name).join(', ') %> <%= link_to "+", new_postthread_connect_path(thread, @connect) %></h5>
         </div>
@@ -77,10 +78,14 @@
 <div class="content horizontal-cards">
   <% @milestones.each do |milestone| %>
     <div class="square-card big-card">
-      <%= image_tag milestone.milestone_pic_url, alt: "milestone-pic", class: "card-image big-image"%>
+      <% if milestone.milestone_pic_url == "" %>
+        <%= image_tag "https://www.iexpats.com/wp-content/uploads/2019/03/milestone.jpg", alt: "milestone-pic", class: "card-image big-image" %>
+      <% else %>
+        <%= image_tag milestone.milestone_pic_url, alt: "milestone-pic", class: "card-image big-image" %>
+      <% end %>
       <div class="card-body">
         <h3><%= milestone.milestone_name %></h3>
-        <p><%= milestone.model_overview %></p>
+        <h5><%= milestone.goal.goal_name %></h5>
         <p>created <%=milestone.created_at  %></p>
           <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_milestone_path(@character, milestone.id), class: "edit-button"  %>
       </div>

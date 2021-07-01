@@ -10,6 +10,8 @@ require("channels")
 import { pieChart, toggleCheckbox } from '../components/pie';
 import { findSortables } from '../components/sortable';
 import 'controllers'
+import { initChatroomCable } from '../channels/chatroom_channel'
+
 
 window.addEventListener('turbolinks:load', () => {
     // Call your JS functions here
@@ -20,6 +22,7 @@ window.addEventListener('turbolinks:load', () => {
   if (document.querySelector(".sortable-container")){
     findSortables();
   }
+  initChatroomCable();
 });
 
 

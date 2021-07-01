@@ -27,6 +27,7 @@ gem 'font-awesome-sass', '~> 5.12.0'
 gem 'simple_form'
 gem 'devise'
 gem 'pg_search', '~> 2.3.0'
+gem 'turbolinks_render'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

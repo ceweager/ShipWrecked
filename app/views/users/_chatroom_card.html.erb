@@ -1,0 +1,21 @@
+<div class="card user-chat-card">
+	<div class="left-profile-chat">
+	  <h3><%= link_to chatroom.name, user_chatroom_path(current_user, chatroom) %></h3>
+		<% if @user == chatroom.user %>
+		  With <%= chatroom.partner.username %>
+			<%= link_to 'Delete?', chatroom_path(chatroom), method: :delete, remote: true %>
+		<% elsif @user == chatroom.partner %>
+		  With <%= chatroom.user.username %>
+		  <%= link_to 'Delete?', chatroom_path(chatroom), method: :delete, remote: true %>
+		<% else %>
+		  With <%= chatroom.partner.username %> and <%= chatroom.user.username %>
+		<% end %>
+	</div>
+	<div class="right-profile-chat">
+	  <% if chatroom.user == current_user && @user == current_user %>
+	  	<%= image_tag chatroom.partner.avatar, class: "small-round-avatar"  %>
+		<% else %>
+		  <%= image_tag chatroom.user.avatar, class: "small-round-avatar"  %>
+		<% end %>
+	</div>
+</div>

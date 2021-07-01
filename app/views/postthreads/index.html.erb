@@ -1,94 +1,104 @@
-<div data-controller = "drag-item" class="flex-container dropzone" data-drag-item-target= "user" id = "<%= params[:user_id] %>">
-  <div class="sortable-container dropzone">
-		<div class="sortable-header">
-			<h3>Not Started</h3>
-		</div>
-		<ul id ="sortable-one">
-			<% @postthreads.each do |thread| %>
-				<% if thread.thread_status == "Not Started" %>
-				  <li id = "<%= thread.id  %>" draggable="true" data-drag-item-target = "postthread" data-action="dragstart->drag-item#dragstart dragover->drag-item#dragover dragenter->drag-item#dragenter dragleave->drag-item#dragleave dragend->drag-item#dragend">
-						<div class="thread-card small-width">
-							<div class="card-body small-body">
-								<h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(thread.milestone.goal.character, thread.id) %></h4>
-								<h5><%= thread.milestone.goal.character.name %> with <%= thread.milestone.goal.character.relationships.map{|relationship|relationship.relation_name}.join(', ') %> </h5>
+<div class="d-flex align-items-center flex-column">
+  <div>
+		<h1>current threads</h1>
+		<%= form_tag user_postthreads_path, class: "form-inline mb-3", method: :get do %>
+			<%= select_tag "first_query", options_for_select(@characters.collect{|c| [c.name, c.id]}, current_user.id), class: "form-control", include_blank: "All" %>
+			<%= select_tag "second_query", options_for_select(@statuses), class: "form-control", include_blank: "All" %>
+			<%= submit_tag "Filter", class: "btn dark-button" %>
+		<% end %>
+	</div>
+	<div data-controller = "drag-item" class="flex-container dropzone" data-drag-item-target= "user" id = "<%= params[:user_id] %>">
+		<div class="sortable-container dropzone">
+			<div class="sortable-header">
+				<h3>Not Started</h3>
+			</div>
+			<ul id ="sortable-one">
+				<% @postthreads.each do |thread| %>
+					<% if thread.thread_status == "Not Started" %>
+						<li id = "<%= thread.id  %>" draggable="true" data-drag-item-target = "postthread" data-action="dragstart->drag-item#dragstart dragover->drag-item#dragover dragenter->drag-item#dragenter dragleave->drag-item#dragleave dragend->drag-item#dragend">
+							<div class="thread-card small-width"> 
+								<div class="card-body small-body">
+									<h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(thread.milestone.goal.character, thread.id) %></h4>
+									<h5><%= thread.milestone.goal.character.name %> with <%= thread.relationships.map(&:relation_name).join(', ') %> </h5>
+								</div>
+								<div class="card-body small-body">
+									<h4 class="align-right"><strong><%= thread.milestone.goal.goal_name %></strong></h4>
+									<h4 class="align-right"><%= thread.milestone.milestone_name %></h4>
+								</div>
 							</div>
-							<div class="card-body small-body">
-								<h4 class="align-right"><strong><%= thread.milestone.goal.goal_name %></strong></h4>
-								<h4 class="align-right"><%= thread.milestone.milestone_name %></h4>
-							</div>
-						</div>
-					</li>
+						</li>
+					<% end %>
 				<% end %>
-			<% end %>
-		</ul>
-  </div>
-  <div class="sortable-container dropzone">
-	  <div class="sortable-header">
-		  <h3>To Reply</h3>
+			</ul>
 		</div>
-		<ul id ="sortable-two">
-			<% @postthreads.each do |thread| %>
-				<% if thread.thread_status == "To Reply" %>
-					<li id = "<%= thread.id  %>" draggable="true" data-drag-item-url="<%= character_postthread_path(thread.milestone.goal.character, thread) %>" data-drag-item-target = "postthread" data-action="dragstart->drag-item#dragstart dragover->drag-item#dragover dragenter->drag-item#dragenter dragleave->drag-item#dragleave dragend->drag-item#dragend" >
-						<div class="thread-card small-width">
-							<div class="card-body small-body">
-								<h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(thread.milestone.goal.character, thread.id) %></h4>
-								<h5><%= thread.milestone.goal.character.name %> with <%= thread.milestone.goal.character.relationships.map{|relationship|relationship.relation_name}.join(', ') %> </h5>
+		<div class="sortable-container dropzone">
+			<div class="sortable-header">
+				<h3>To Reply</h3>
+			</div>
+			<ul id ="sortable-two">
+				<% @postthreads.each do |thread| %>
+					<% if thread.thread_status == "To Reply" %>
+						<li id = "<%= thread.id  %>" draggable="true" data-drag-item-url="<%= character_postthread_path(thread.milestone.goal.character, thread) %>" data-drag-item-target = "postthread" data-action="dragstart->drag-item#dragstart dragover->drag-item#dragover dragenter->drag-item#dragenter dragleave->drag-item#dragleave dragend->drag-item#dragend" >
+							<div class="thread-card small-width">
+								<div class="card-body small-body">
+									<h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(thread.milestone.goal.character, thread.id) %></h4>
+									<h5><%= thread.milestone.goal.character.name %> with <%= thread.relationships.map(&:relation_name).join(', ') %> </h5>
+								</div>
+								<div class="card-body small-body">
+									<h4 class="align-right"><strong><%= thread.milestone.goal.goal_name %></strong></h4>
+									<h4 class="align-right"><%= thread.milestone.milestone_name %></h4>
+								</div>
 							</div>
-							<div class="card-body small-body">
-								<h4 class="align-right"><strong><%= thread.milestone.goal.goal_name %></strong></h4>
-								<h4 class="align-right"><%= thread.milestone.milestone_name %></h4>
-							</div>
-						</div>
-					</li>
+						</li>
+					<% end %>
 				<% end %>
-			<% end %>
-		</ul>
-  </div>
-  <div class="sortable-container dropzone">
-	  <div class="sortable-header">
-		  <h3>Waiting for Reply</h3>
+			</ul>
 		</div>
-		<ul id = "sortable-three">
-			<% @postthreads.each do |thread| %>
-				<% if thread.thread_status == "Waiting for Reply" %>
-					<li id = "<%= thread.id  %>" draggable="true" data-drag-item-url="<%= character_postthread_path(thread.milestone.goal.character, thread) %>" data-action="dragstart->drag-item#dragstart dragover->drag-item#dragover dragenter->drag-item#dragenter dragleave->drag-item#dragleave dragend->drag-item#dragend">
-						<div class="thread-card small-width">
-							<div class="card-body small-body">
-								<h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(thread.milestone.goal.character, thread.id) %></h4>
-								<h5><%= thread.milestone.goal.character.name %> with <%= thread.milestone.goal.character.relationships.map{|relationship|relationship.relation_name}.join(', ') %> </h5>
+		<div class="sortable-container dropzone">
+			<div class="sortable-header">
+				<h3>Waiting for Reply</h3>
+			</div>
+			<ul id = "sortable-three">
+				<% @postthreads.each do |thread| %>
+					<% if thread.thread_status == "Waiting for Reply" %>
+						<li id = "<%= thread.id  %>" draggable="true" data-drag-item-url="<%= character_postthread_path(thread.milestone.goal.character, thread) %>" data-action="dragstart->drag-item#dragstart dragover->drag-item#dragover dragenter->drag-item#dragenter dragleave->drag-item#dragleave dragend->drag-item#dragend">
+							<div class="thread-card small-width">
+								<div class="card-body small-body">
+									<h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(thread.milestone.goal.character, thread.id) %></h4>
+									<h5><%= thread.milestone.goal.character.name %> with <%= thread.relationships.map(&:relation_name).join(', ') %> </h5>
+								</div>
+								<div class="card-body small-body">
+									<h4 class="align-right"><strong><%= thread.milestone.goal.goal_name %></strong></h4>
+									<h4 class="align-right"><%= thread.milestone.milestone_name %></h4>
+								</div>
 							</div>
-							<div class="card-body small-body">
-								<h4 class="align-right"><strong><%= thread.milestone.goal.goal_name %></strong></h4>
-								<h4 class="align-right"><%= thread.milestone.milestone_name %></h4>
-							</div>
-						</div>
-					</li>
+						</li>
+					<% end %>
 				<% end %>
-			<% end %>
-		</ul>
-  </div>
-  <div class="sortable-container dropzone">
-	  <div class="sortable-header">
-		  <h3>Completed</h3>
+			</ul>
 		</div>
-		<ul id = "sortable-four">
-			<% @postthreads.each do |thread| %>
-				<% if thread.thread_status == "Completed" %>
-					<li id = "<%= thread.id  %>" draggable="true"  data-drag-item-url="<%= character_postthread_path(thread.milestone.goal.character, thread) %>"data-action="dragstart->drag-item#dragstart dragover->drag-item#dragover dragenter->drag-item#dragenter dragleave->drag-item#dragleave dragend->drag-item#dragend">
-						<div class="thread-card small-width">
-							<div class="card-body small-body">
-								<h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(thread.milestone.goal.character, thread.id) %></h4>
-								<h5><%= thread.milestone.goal.character.name %> with <%= thread.milestone.goal.character.relationships.map{|relationship|relationship.relation_name}.join(', ') %></h5>
+		<div class="sortable-container dropzone">
+			<div class="sortable-header">
+				<h3>Completed</h3>
+			</div>
+			<ul id = "sortable-four">
+				<% @postthreads.each do |thread| %>
+					<% if thread.thread_status == "Completed" %>
+						<li id = "<%= thread.id  %>" draggable="true"  data-drag-item-url="<%= character_postthread_path(thread.milestone.goal.character, thread) %>"data-action="dragstart->drag-item#dragstart dragover->drag-item#dragover dragenter->drag-item#dragenter dragleave->drag-item#dragleave dragend->drag-item#dragend">
+							<div class="thread-card small-width">
+								<div class="card-body small-body">
+									<h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(thread.milestone.goal.character, thread.id) %></h4>
+									<h5><%= thread.milestone.goal.character.name %> with <%= thread.relationships.map(&:relation_name).join(', ') %></h5>
+								</div>
+								<div class="card-body small-body">
+									<h4 class="align-right"><strong><%= thread.milestone.goal.goal_name %></strong></h4>
+									<h4 class="align-right"><%= thread.milestone.milestone_name %></h4>
+								</div>
 							</div>
-							<div class="card-body small-body">
-								<h4 class="align-right"><strong><%= thread.milestone.goal.goal_name %></strong></h4>
-								<h4 class="align-right"><%= thread.milestone.milestone_name %></h4>
-							</div>
-						</div>
-					</li>
+						</li>
+					<% end %>
 				<% end %>
-			<% end %>
-		</ul>
-  </div>
+			</ul>
+		</div>
+	</div>
 </div>
