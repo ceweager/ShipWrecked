@@ -1,6 +1,8 @@
 <div class="category justify-content-between">
   <h2>goals (<%= @goals.count %>)</h2>
-  <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_goal_path(@character) %></h2>
+  <% if @user == current_user %>
+    <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_goal_path(@character) %></h2>
+  <%end %>
 </div>
 
 <div class="content">
@@ -10,7 +12,9 @@
         <div class="goalcard-left">
           <h3><%= goal.goal_name %></h3>
         </div>
-        <h4><%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe,  edit_character_goal_path(@character, goal.id) %></h4>
+        <% if @user == current_user %>
+          <h4><%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe,  edit_character_goal_path(@character, goal.id) %></h4>
+        <% end %>
       </div>
     <% end %>
   </div>
@@ -50,7 +54,9 @@
 
 <div class="category justify-content-between">
   <h2>threads (<%= @threads.count %>)</h2>
-  <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_postthread_path(@character) %></h2>
+  <% if @user == current_user %>
+    <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_postthread_path(@character) %></h2>
+  <% end %>
 </div>
 
 <div class="content thread-content">
@@ -59,8 +65,18 @@
       <div class="thread-card">
         <%= image_tag thread.relationships.first.relation_pic, alt: thread.relationships.first.relation_name , class: "small-round-avatar my-2", style: "object-position: center top;"%>
         <div class="card-body my-1">
-          <h4><%= link_to thread.thread_name, thread.thread_link  %> <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(@character, thread.id) %></h4>
-          <h5><%= @character.name %> with <%= thread.relationships.map(&:relation_name).join(', ') %> <%= link_to "+", new_postthread_connect_path(thread, @connect) %></h5>
+          <h4>
+            <%= link_to thread.thread_name, thread.thread_link  %> 
+            <% if @user == current_user %>
+              <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_postthread_path(@character, thread.id) %>
+            <% end %>
+          </h4>
+          <h5>
+            <%= @character.name %> with <%= thread.relationships.map(&:relation_name).join(', ') %> 
+            <% if @user == current_user %>
+              <%= link_to "+", new_postthread_connect_path(thread, @connect) %>
+            <% end %>
+          </h5>
         </div>
         <div class="card-body">
           <h4 class="align-right"><strong><%= thread.milestone.goal.goal_name%></strong></h4>
@@ -73,7 +89,9 @@
 
 <div class="category justify-content-between">
   <h2>milestones (<%= @milestones.count %>)</h2>
-  <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_milestone_path(@character) %></h2>
+  <% if @user == current_user %>
+    <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_milestone_path(@character) %></h2>
+  <% end %>
 </div>
 <div class="content horizontal-cards">
   <% @milestones.each do |milestone| %>
@@ -87,7 +105,9 @@
         <h3><%= milestone.milestone_name %></h3>
         <h5><%= milestone.goal.goal_name %></h5>
         <p>created <%=milestone.created_at.strftime("%d %B %Y" )  %></p>
+        <% if @user == current_user %>
           <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_character_milestone_path(@character, milestone.id), class: "edit-button"  %>
+        <% end %>
       </div>
     </div>
   <% end %>

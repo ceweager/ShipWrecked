@@ -3,13 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :characters
-  has_many :relationships, through: :characters
-  has_many :chatrooms
-  has_many :messages
-  has_many :postthreads, through: :characters
-  has_many :friendship_invites
-  has_many :friends, through: :friendship_invites
+  has_many :characters, dependent: :destroy
+  has_many :relationships, through: :characters, dependent: :destroy
+  has_many :chatrooms, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :postthreads, through: :characters, dependent: :destroy
+  has_many :friendship_invites, dependent: :destroy
+  has_many :friends, through: :friendship_invites, dependent: :destroy
   has_many :friend_invites_as_friend, foreign_key: :friend_id, class_name: :FriendshipInvite
   after_create :set_admin_to_false
   include PgSearch::Model
@@ -23,6 +23,6 @@ class User < ApplicationRecord
 
   def set_admin_to_false
     self.admin = false
-    self.save
+    save
   end
 end

@@ -1,12 +1,14 @@
 <div class="user-profile">
   <div class="left-user-profile">
     <div class="category about-user-profile">
-      <h1><%= @user.username %></h1>
+      <h1>About me</h1>
       <p><%= @user.about %></p>
     </div>
     <div class="category justify-content-between">
       <h3>Characters</h3>
-      <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe, new_user_character_path(@user) %></h2>
+      <% if @user == current_user %>
+        <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe, new_user_character_path(@user) %></h2>
+      <% end %>
     </div>
     <div class="character-profiles content w-100">
       <% if @user.characters.empty? %>
@@ -108,6 +110,7 @@
       <% end %>
     </div>
     <div class="user-details">
+      <h1><%= @user.username %></h1>
       <h4>Age</h4>
       <h3><%= @user.age %></h3>
       <h4>Pronouns</h4>
