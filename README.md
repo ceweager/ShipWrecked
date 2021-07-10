@@ -1,24 +1,20 @@
-# README
+# SHIPWRECKED
+Ruby-on-rails | HTML | CSS | Javascript | PostgresSQL | Stimulus.js | Sortable.js
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Overview of project**
+Built to further my knowledge of ruby on rails, javascript and ajax, ShipWrecked is a website where writers and roleplayers may managed their characters, goals, milestones and ongoing plot threads, as well as collaborate with other writers and discuss plots and suggested ideas.
 
-Things you may want to cover:
+![image](https://user-images.githubusercontent.com/66081334/125176383-de0d7780-e1ca-11eb-94cd-dd6b9c22dc78.png)
 
-* Ruby version
+It enables users to create and manage their character's goals, milestones, threads and relationships. A built in dashboard makes it easy to track completion of these items, while a biography page helps to maintain a consistent character personality a history.
 
-* System dependencies
+![image](https://user-images.githubusercontent.com/66081334/125176401-009f9080-e1cb-11eb-8551-3a18011edb79.png)
 
-* Configuration
+ShipWreck includes a custom built kanban board to help users keep track of their thread statuses and progress. At the moment, columns are fixed, but in the future will be customisable. This was built using sortable.js and stimulus.js to enable live changes to be posted to the database.
 
-* Database creation
+![image](https://user-images.githubusercontent.com/66081334/125176414-13b26080-e1cb-11eb-8567-dcd6ad99cbbd.png)
 
-* Database initialization
+There is also a built in communication feature that enables friends to reach out to each other and discuss potential plot themes and ideas, built using action cable.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![image](https://user-images.githubusercontent.com/66081334/125176430-26c53080-e1cb-11eb-8c09-cb5007aae460.png)
+![image](https://user-images.githubusercontent.com/66081334/125176453-5e33dd00-e1cb-11eb-9c97-222f5bcd10b3.png)
