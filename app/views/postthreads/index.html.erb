@@ -108,7 +108,7 @@
       <div class="rank-box">
         rank 1
       </div>
-      <%= image_tag @user.avatar, alt: @user.username, class: "round-avatar" %>
+      <%= cl_image_tag @user.photo.key, alt: @user.username, class: "round-avatar" %>
         <% unless current_user.friends.includes(@user) %>
         <%= simple_form_for([@user, @friendinvite]) do |f|%>
           <%= button_tag(type: 'submit', class:'btn-purple') do %>

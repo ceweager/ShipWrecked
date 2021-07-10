@@ -23,8 +23,9 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'autoprefixer-rails'
+gem 'cloudinary', '~> 1.16.0'
 gem 'devise'
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails', groups: %i[development test]
 gem 'font-awesome-sass', '~> 5.12.0'
 gem 'pg_search', '~> 2.3.0'
 gem 'simple_form'

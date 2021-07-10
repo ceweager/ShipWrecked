@@ -1,23 +1,48 @@
-<div class="container narrow-container">
-  <%= form_tag users_path, class: "form-inline" , method: :get do%>
-    <%= text_field_tag :query, 
-      params[:query],
-      class: "form-control",
-      placeholder: "find a user"
-    %>
-    <%= submit_tag "Search", class: "btn dark-button" %>
-  <% end %>
-  <div class="category justify-content-between">
-        <h2>all users</h2>
-      </div>
-  <% @users.each do |user|%>
-    <div class="card">
-      <%= link_to user.username, user_path(user) %>
-      <% unless current_user.friendship_invites.find_by(friend_id: user) || user == current_user %>
-        <%= simple_form_for([user, @friendinvite]) do |f| %>
-          <%= f.submit class:'btn', value: "add to friends" %>
-        <% end %>
+<div class="user-profile">
+  <div class="left-user-profile">
+    <%= form_tag users_path, class: "form-inline" , method: :get do%>
+      <%= text_field_tag :query, 
+        params[:query],
+        class: "form-control",
+        placeholder: "find a user"
+      %>
+      <%= submit_tag "Search", class: "btn dark-button" %>
+    <% end %>
+    <div class="category justify-content-between">
+      <h2>all users</h2>
+    </div>
+    <div style="display:flex; flex-wrap:wrap;">
+      <% @users.each do |user|%>
+        <div class="card d-flex flex-row align-items-center mr-3" style="border-radius:35px;width:47%;">
+          <%= cl_image_tag user.photo.key, class: "small-round-avatar" %>
+          <h3><%= link_to user.username, user_path(user), class: "ml-3 mr-3" %></h3>
+          <% unless user.invite?(current_user) || current_user.invite?(user) || user == current_user %>
+            <%= simple_form_for([user, @friendinvite]) do |f| %>
+              <%= f.button :button do %>
+                <i class="fas fa-user-plus"></i>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
       <% end %>
     </div>
-  <% end %>
+  </div>
+  <div class="right-user-profile">
+    <div class="user-profile-image">
+      <div class="rank-box">
+        rank 1
+      </div>
+      <%= cl_image_tag current_user.photo.key, class: "round-avatar" %>
+    </div>
+    <div class="user-details">
+      <h1><%= current_user.username %></h1>
+      <h4>Age</h4>
+      <h3><%= current_user.age %></h3>
+      <h4>Pronouns</h4>
+      <h3><%= current_user.pronouns %></h3>
+      <h4>Timezone</h4>
+      <h3><%= current_user.timezone %></h3>
+      <h4>Preferences</h4>
+    </div>
+  </div>
 </div>

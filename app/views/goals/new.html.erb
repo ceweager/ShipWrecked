@@ -2,6 +2,6 @@
   <%= simple_form_for([@character, @goal]) do |f| %>
     <%= f.input :goal_name %>
     <%= f.input :goal_detail %>
-    <%= f.submit %>
+    <%= f.submit 'Submit', class: "form-button"  %>
   <% end %>
 </div>

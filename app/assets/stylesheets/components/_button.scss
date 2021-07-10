@@ -8,7 +8,39 @@
   border-radius: 50%;
 }
 
-.dark-button{
+.dark-button, .form-button{
   background-color: $darkpurple;
   color: $lightpurple;
+}
+
+.form-button{
+  border-radius:10px;
+  background-color: rgba($darkpurple, 0.8);
+  &:hover{
+    background-color: $darkpurple;
+    color: $lightpurple;
+  }
+}
+
+.pref-pill{
+  font-size: 12px;
+  background-color: $lavenderpurple;
+  color: $lightpurple;
+  padding: 4px 12px;
+  border-radius: 10px;
+  margin: 2px;
+  display:inline-block;
+}
+
+.hidden-button{
+  background-color: transparent;
+  color: $darkpurple; 
+  border: none;
+  display: inline-block;
+}
+
+.back-button{
+  position:fixed;
+  bottom: 30px;
+  left: 30px;
 }

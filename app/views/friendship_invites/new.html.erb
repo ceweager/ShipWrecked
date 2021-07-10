@@ -1,5 +1,5 @@
 <h1>Would you like to send <%= @friend.username %> a friend invite ?</h1>
 <%= simple_form_for([@friend, @friendinvite]) do |f| %>
   <%= f.input :user_confirm, collection: [true, false]%>
-  <%= f.submit %>
+  <%= f.submit 'Submit', class: "form-button"  %>
 <% end %>

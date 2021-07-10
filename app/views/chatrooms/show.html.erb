@@ -1,21 +1,41 @@
-<div class="container mt-3">
-  <h1><%= @chatroom.name %></h1>
-  <% if @chatroom.user == current_user %>
-    <h5>Plotting with <%= @chatroom.partner.username.capitalize %></h5>
-  <% else %>
-    <h5>Plotting with <%= @chatroom.user.username.capitalize %></h5>
-  <% end %>
-  <div id="messages" data-chatroom-id="<%= @chatroom.id %>" class="my-3">
-    
-    <% @chatroom.messages.each do |message| %>
-      <%= render './messages/message', message: message %>
+<div class="user-profile">
+  <div class="left-user-profile">
+    <h1><%= @chatroom.name %></h1>
+    <% if @chatroom.user == current_user %>
+      <h5>Plotting with <%= @chatroom.partner.username.capitalize %></h5>
+    <% else %>
+      <h5>Plotting with <%= @chatroom.user.username.capitalize %></h5>
+    <% end %>
+    <div id="messages" data-chatroom-id="<%= @chatroom.id %>" class="my-3">
+      
+      <% @chatroom.messages.each do |message| %>
+        <%= render './messages/message', message: message %>
+      <% end %>
+    </div>
+    <%= simple_form_for [@chatroom, @message], remote: true do |f| %>
+      <% if @chatroom.user == current_user %>
+        <%= f.input :content, label: false, placeholder: "Message #{@chatroom.partner.username.capitalize} to plot with them!" %>
+      <% else %>
+        <%= f.input :content, label: false, placeholder: "Message #{@chatroom.user.username.capitalize} to plot with them!" %>
+      <% end %>
     <% end %>
   </div>
-  <%= simple_form_for [@chatroom, @message], remote: true do |f| %>
-    <% if @chatroom.user == current_user %>
-      <%= f.input :content, label: false, placeholder: "Message #{@chatroom.partner.username.capitalize} to plot with them!" %>
-    <% else %>
-      <%= f.input :content, label: false, placeholder: "Message #{@chatroom.user.username.capitalize} to plot with them!" %>
-    <% end %>
-  <% end %>
+  <div class="right-user-profile">
+    <div class="user-profile-image">
+      <div class="rank-box">
+        rank 1
+      </div>
+      <%= cl_image_tag @partner.photo.key, alt:  @partner.username, class: "round-avatar" %>
+    </div>
+    <div class="user-details">
+      <h1><%= @partner.username %></h1>
+      <h4>Age</h4>
+      <h3><%= @partner.age %></h3>
+      <h4>Pronouns</h4>
+      <h3><%= @partner.pronouns %></h3>
+      <h4>Timezone</h4>
+      <h3><%=  @partner.timezone %></h3>
+      <h4>Preferences</h4>
+    </div>
+  </div>
 </div>

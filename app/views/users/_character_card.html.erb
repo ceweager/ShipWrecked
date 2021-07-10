@@ -1,6 +1,6 @@
 <div class="card character-card">
 	<div class="left-character">
-			<%= image_tag character.character_pic, alt: character.name, class: "small-image" %>
+			<%= cl_image_tag character.photo.key, height: 300, width: 300, alt: character.name, gravity: :face, crop: :fill,class: "small-image" %>
 	</div>
 	<div class="right-character">
 			<%= link_to character.name, user_character_path(@user, character) %>

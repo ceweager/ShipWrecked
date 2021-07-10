@@ -11,7 +11,8 @@
       <%= f.input :age, required: false, autofocus: true %>
       <%= f.input :pronouns, required: false, autofocus: true %>
       <%= f.input :timezone, required: false, autofocus: true %>
-      <%= f.input :avatar, required: false, autofocus: true, label: "Avatar Url" %>
+      <%= f.input :preferences, label: "writing preferences", required: false, autofocus: true, hint: "please write each preference separated by a comma" %>
+      <%= f.input :photo, as: :file, required: true %>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
@@ -30,10 +31,8 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Update" %>
+      <%= f.button :submit, "Update", class: "form-button" %>
+      <%= link_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
     </div>
-    <%= link_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
   <% end %>
 </div>
-
-<%= link_to "Back", :back %>

@@ -13,9 +13,9 @@
 	</div>
 	<div class="right-profile-chat">
 	  <% if chatroom.user == current_user && @user == current_user %>
-	  	<%= image_tag chatroom.partner.avatar, class: "small-round-avatar"  %>
+	  	<%= cl_image_tag chatroom.partner.photo.key, class: "small-round-avatar"  %>
 		<% else %>
-		  <%= image_tag chatroom.user.avatar, class: "small-round-avatar"  %>
+		  <%= cl_image_tag chatroom.user.photo.key, class: "small-round-avatar"  %>
 		<% end %>
 	</div>
 </div>

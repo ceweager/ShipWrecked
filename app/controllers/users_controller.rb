@@ -18,5 +18,6 @@ class UsersController < ApplicationController
                                       query: @user.id.to_s).where(friend_confirm: true)
     @chatroom = Chatroom.new
     @chatrooms = current_user.chatrooms.where(partner: @user) + @user.chatrooms.where(partner: current_user)
+    @preferences = @user.preferences ? @user.preferences.split(',') : []
   end
 end

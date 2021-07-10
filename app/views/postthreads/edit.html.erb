@@ -6,7 +6,7 @@
     <%= f.input :thread_detail %>
     <%= f.input :thread_link %>
     <%= f.association :milestone, collection: @milestones, label_method: :milestone_name %>
-    <%= f.submit %>
+    <%= f.submit 'Submit', class: "form-button"  %>
     <%= link_to "Delete",
         postthread_path(@postthread),
         method: :delete,

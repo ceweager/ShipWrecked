@@ -1,7 +1,7 @@
 class MilestonesController < ApplicationController
-  before_action :find_character, only: [:new, :create, :edit, :update]
-  before_action :find_goals, only: [:new, :create, :edit, :update]
-  before_action :find_milestone, only: [:edit, :update, :destroy]
+  before_action :find_character, only: %i[new create edit update]
+  before_action :find_goals, only: %i[new create edit update]
+  before_action :find_milestone, only: %i[edit update destroy]
 
   def new
     @milestone = Milestone.new
@@ -16,8 +16,7 @@ class MilestonesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @milestone.update(milestone_params)
@@ -45,6 +44,6 @@ class MilestonesController < ApplicationController
   end
 
   def milestone_params
-    params.require(:milestone).permit(:milestone_name, :milestone_pic_url, :model_overview, :goal_id)
+    params.require(:milestone).permit(:milestone_name, :photo, :model_overview, :goal_id)
   end
 end

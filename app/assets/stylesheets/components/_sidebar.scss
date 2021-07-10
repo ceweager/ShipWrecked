@@ -1,7 +1,7 @@
 .sidebar{
   width: 21.25rem;
   background-color: $darkpurple;
-
+  grid-column: 1 / span 1;
   h3{
     display: block;
   }

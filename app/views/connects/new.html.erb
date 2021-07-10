@@ -1,7 +1,7 @@
 <div class="container mt-3">
   <%= simple_form_for([@thread, @connect]) do |f|%>
     <%= f.input :relationship_id, collection: @relationships, label_method: :relation_name %>
-    <%= f.submit "Add relationship" %>
+    <%= f.submit "Add relationship", class: "form-button" %>
     <%= link_to "create new relationship",new_character_relationship_path(@thread.milestone.goal.character)%>
   <% end %>
 </div>

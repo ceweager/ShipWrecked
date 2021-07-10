@@ -11,7 +11,7 @@
 		<%= f.input :personality %>
 		<%= f.input :history %>
 		<%= f.input :other %>
-		<%= f.input :character_pic %>
-		<%= f.submit %>
+		<%= f.input :photo, as: :file %>
+		<%= f.submit 'Submit', class: "form-button"  %>
 	<% end %>
 </div>

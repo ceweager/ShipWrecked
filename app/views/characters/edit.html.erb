@@ -1,2 +1,12 @@
-<h1>Characters#edit</h1>
-<p>Find me in app/views/characters/edit.html.erb</p>
+<div class="container mt-4">
+	<%= simple_form_for([current_user, @character]) do |f| %>
+		<%= f.input :name %>
+		<%= f.input :age %>
+		<%= f.input :gender %>
+		<%= f.input :birthday %>
+		<%= f.input :sexuality %>
+		<%= f.input :overview %>
+		<%= f.input :photo, as: :file %>
+		<%= f.submit 'Submit', class: "form-button" %>
+	<% end %>
+</div>

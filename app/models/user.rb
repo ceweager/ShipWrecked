@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :friendship_invites, dependent: :destroy
   has_many :friends, through: :friendship_invites, dependent: :destroy
   has_many :friend_invites_as_friend, foreign_key: :friend_id, class_name: :FriendshipInvite
+  has_one_attached :photo
   after_create :set_admin_to_false
   include PgSearch::Model
   pg_search_scope :search_by_username,
@@ -18,6 +19,10 @@ class User < ApplicationRecord
                   using: {
                     tsearch: { prefix: true }
                   }
+
+  def invite?(user)
+    friendship_invites.find_by(friend_id: user) || friendship_invites.find_by(user: user)
+  end
 
   private
 

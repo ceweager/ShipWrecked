@@ -6,6 +6,6 @@
     <%= f.input :thread_link %>
     <%= f.association :milestone, collection: @milestones, label_method: :milestone_name %>
     <%= f.input :relationships, collection: @relations, :label_method => :relation_name, as: :check_boxes, style: "display:inline-block;" %>
-    <%= f.submit %>
+    <%= f.submit 'Submit', class: "form-button"  %>
   <% end %>
 </div>

@@ -1,6 +1,6 @@
 <div class="message-container" id="message-<%= message.id %>">
   <i class="author d-flex mb-3" >
-    <%= image_tag message.user.avatar, class: "small-round-avatar", style: "height:50px;width:50px;" %>
+    <%= cl_image_tag message.user.photo.key, class: "small-round-avatar", style: "height:50px;width:50px;" %>
     <div class="d-flex flex-column justify-content-center ml-2">
       <span><%= message.user.username %></span>
       <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>

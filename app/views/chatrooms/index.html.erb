@@ -1,9 +1,13 @@
 <div class="user-profile">
   <div class="left-user-profile">
     <div class="user-profile-chat">
-    <h1>plotting dashboard</h1>
-      <% @chatrooms.each do |chatroom|%>
-        <%= render './users/chatroom_card', chatroom: chatroom %>
+      <h1>plotting dashboard</h1>
+      <% if @chatrooms.empty? %>
+        <p>You have no plots yet. Ask your friends to plot!</p>
+      <% else %>
+        <% @chatrooms.each do |chatroom|%>
+          <%= render './users/chatroom_card', chatroom: chatroom %>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -12,7 +16,7 @@
       <div class="rank-box">
         rank 1
       </div>
-      <%= image_tag @user.avatar, alt: @user.username, class: "round-avatar" %>
+      <%= cl_image_tag @user.photo.key, alt: @user.username, class: "round-avatar" %>
         <% unless current_user.friends.includes(@user) %>
         <%= simple_form_for([@user, @friendinvite]) do |f|%>
           <%= button_tag(type: 'submit', class:'btn-purple') do %>

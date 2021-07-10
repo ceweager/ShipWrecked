@@ -2,7 +2,11 @@
   <div class="left-user-profile">
     <div class="category about-user-profile">
       <h1>About me</h1>
-      <p><%= @user.about %></p>
+      <% if @user.about.nil? %>
+        <p>No information yet on <%= @user.username%> but I'm sure they're a fun person :)</p>
+      <% else %>
+        <p><%= @user.about %></p>
+      <% end %>
     </div>
     <div class="category justify-content-between">
       <h3>Characters</h3>
@@ -26,14 +30,18 @@
     </div>
     <div class="user-friend-list">
       <% if @friends.count(:friend_confirm).zero? %>
-        <p style="display: block; width: 100%;">No friends yet! Search to add some.</p>
-         <%= form_tag users_path, class: "form-inline" , method: :get do%>
-          <%= text_field_tag :query, 
-            params[:query],
-            class: "form-control",
-            placeholder: "find a friend"
-          %>
-          <%= submit_tag "Search", class: "btn dark-button" %>
+        <% if current_user == @user %>
+          <p style="display: block; width: 100%;">No friends yet! Search to add some.</p>
+          <%= form_tag users_path, class: "form-inline" , method: :get do%>
+            <%= text_field_tag :query, 
+              params[:query],
+              class: "form-control",
+              placeholder: "find a friend"
+            %>
+            <%= submit_tag "Search", class: "btn dark-button" %>
+          <% end %>
+        <% else %>
+          <p style="display: block; width: 100%;"><%= @user.username %> has no friends yet! Add <%= @user.username %> to your friends.</p>
         <% end %>
       <% end %>
       <% @friends.each do |invite| %>
@@ -79,7 +87,7 @@
           <% @pending.each do |invite| %>
               <% unless invite.friend_confirm %>
               <div class="card d-flex" style = "flex-direction:row; border-radius:35px;">
-                  <%= image_tag invite.friend.avatar, class: "small-round-avatar" %>
+                  <%= cl_image_tag invite.friend.photo.key, class: "small-round-avatar" %>
                   <div class = "d-flex justify-content-between mx-5" style ="flex-grow: 1; align-items:center;">
                     <h3><%= link_to invite.friend.username, user_path(invite.friend) %></h3>
                     <%= link_to '<i class="fas fa-user-times"></i>'.html_safe,
@@ -100,8 +108,8 @@
       <div class="rank-box">
         rank 1
       </div>
-      <%= image_tag @user.avatar, alt: @user.username, class: "round-avatar" %>
-        <% unless current_user.friends.includes(@user) %>
+      <%= cl_image_tag @user.photo.key, class: "round-avatar" %>
+      <% unless current_user.friends.includes(@user) %>
         <%= simple_form_for([@user, @friendinvite]) do |f|%>
           <%= button_tag(type: 'submit', class:'btn-purple') do %>
               <i class="fas fa-user-plus"></i>
@@ -118,6 +126,13 @@
       <h4>Timezone</h4>
       <h3><%= @user.timezone %></h3>
       <h4>Preferences</h4>
+      <div style=" display:inline-block;">
+        <% unless @preferences.empty? %>
+          <% @preferences.each do |preference| %>
+            <div class="pref-pill"><%= preference %></div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -16,9 +16,13 @@
       </div>
     </div>
   </div>
-  <div class="right-user-profile">
+  <div class="right-user-profile" style="width:22%;">
     <div class="user-profile-image">
-      <%= image_tag @character.character_pic, alt: "pic of #{@character.name}", class: "square-image" %>
+      <%= cl_image_tag @character.photo.key, alt: "pic of #{@character.name}", height: 250, width: 250, gravity: :face, crop: :fill, class: "square-image" %>
+      <p>Played by <%= link_to @character.user.username, user_path(@character.user) %></p>
+      <% if @character.user == current_user %>
+        <%= link_to '<i class="fas fa-pen-fancy"></i>'.html_safe, edit_user_character_path(current_user, @character), class: "edit-button"  %>
+      <% end %>
     </div>
     <div class="user-details character-right">
       <h1><%= @character.name %></h1>

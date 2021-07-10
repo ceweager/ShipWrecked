@@ -5,18 +5,19 @@
   font-size: 30px;
   font-weight: 800;
   color: $lavenderpurple;
+  letter-spacing: 3px;
 }
 
 .flexbox{
   min-height: 100vh;
   position:relative;
-  display:flex;
+  display:grid;
+  grid-template-columns: 3fr 17fr;
 }
 
 .view{
   background-color: $whitepurple;
-  flex-grow:1;
-
+  grid-column: 2 / span 1;
 }
 
 .inactive{
