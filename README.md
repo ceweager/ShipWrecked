@@ -9,9 +9,11 @@ ShipWrecked allows writers and roleplayers to manage their characters, goals, mi
 
 ![image](https://user-images.githubusercontent.com/66081334/125176383-de0d7780-e1ca-11eb-94cd-dd6b9c22dc78.png)
 
-It enables users to create and manage their character's goals, milestones, threads and relationships. A built in dashboard makes it easy to track completion of these items, while a biography page helps to maintain a consistent character personality a history.
+It enables users to create and manage their character's goals, milestones, threads and relationships. A built in dashboard makes it easy to track completion of these items, while a biography page helps to maintain a consistent character personality and history.
 
 ![image](https://user-images.githubusercontent.com/66081334/125176401-009f9080-e1cb-11eb-8551-3a18011edb79.png)
+![image](https://user-images.githubusercontent.com/66081334/125176513-f16d1280-e1cb-11eb-8509-bea82a022a2b.png)
+
 
 ShipWreck includes a custom built kanban board to help users keep track of their thread statuses and progress. At the moment, columns are fixed, but in the future will be customisable. This was built using sortable.js and stimulus.js to enable live changes to be posted to the database.
 
