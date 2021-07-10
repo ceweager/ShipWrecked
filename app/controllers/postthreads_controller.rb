@@ -6,6 +6,7 @@ class PostthreadsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
+    @preferences = @user.preferences ? @user.preferences.split(',') : []
     @characters = current_user.characters
     @statuses = ['Not Started', 'To Reply', 'Waiting for Reply', 'Completed']
     filter_threads

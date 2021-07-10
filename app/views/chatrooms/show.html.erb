@@ -36,6 +36,13 @@
       <h4>Timezone</h4>
       <h3><%=  @partner.timezone %></h3>
       <h4>Preferences</h4>
+      <div style=" display:inline-block;width:250px;">
+        <% unless @preferences.empty? %>
+          <% @preferences.each do |preference| %>
+            <div class="pref-pill"><%= preference %></div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

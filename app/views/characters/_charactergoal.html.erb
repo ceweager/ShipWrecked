@@ -76,7 +76,9 @@
       <% else %>
         <div class="thread-card">
       <% end %>
-          <%= cl_image_tag thread.relationships.first.photo.key, alt: thread.relationships.first.relation_name , class: "small-round-avatar my-2", style: "object-position: center top;"%>
+          <% unless thread.relationships.empty? %>
+            <%= cl_image_tag thread.relationships.first.photo.key, alt: thread.relationships.first.relation_name , class: "small-round-avatar my-2", style: "object-position: center top;"%>
+          <% end %>
           <div class="card-body my-1">
             <h4>
               <%= link_to thread.thread_name, thread.thread_link  %> 
@@ -91,7 +93,10 @@
               <% end %>
             </h4>
             <h5>
-              <%= @character.name %> with <%= thread.relationships.map(&:relation_name).join(', ') %> 
+              <%= @character.name %> 
+              <% unless thread.relationships.empty? %>
+                with <%= thread.relationships.map(&:relation_name).join(', ') %> 
+              <% end %>
               <% if @user == current_user %>
                 <%= link_to "+", new_postthread_connect_path(thread, @connect) %>
               <% end %>

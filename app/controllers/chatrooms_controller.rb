@@ -1,12 +1,14 @@
 class ChatroomsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
+    @preferences = @user.preferences ? @user.preferences.split(',') : []
     @chatrooms = Chatroom.where(user: @user) + Chatroom.where(partner: current_user)
   end
 
   def show
     @chatroom = Chatroom.find(params[:id])
     @partner = @chatroom.user == current_user ? @chatroom.partner : @chatroom.user
+    @preferences = @partner.preferences ? @partner.preferences.split(',') : []
     @message = Message.new
   end
 

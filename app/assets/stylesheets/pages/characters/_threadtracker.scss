@@ -17,6 +17,9 @@
     text-decoration:none;
     list-style:none;
   }
+  .thread-card{
+    background-image: linear-gradient(to left, rgba($lavenderpurple, 0.8), rgba($darkpurple, 0.9));
+  }
 }
 
 .sortable-header{
