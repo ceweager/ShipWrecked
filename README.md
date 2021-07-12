@@ -1,4 +1,5 @@
 # SHIPWRECKED
+Ongoing project
 Ruby-on-rails | HTML | CSS | Javascript | PostgresSQL | Stimulus.js | Sortable.js
 
 **Overview of project**
@@ -15,7 +16,7 @@ It enables users to create and manage their character's goals, milestones, threa
 ![image](https://user-images.githubusercontent.com/66081334/125176513-f16d1280-e1cb-11eb-8509-bea82a022a2b.png)
 
 
-ShipWreck includes a custom built kanban board to help users keep track of their thread statuses and progress. At the moment, columns are fixed, but in the future will be customisable. This was built using sortable.js and stimulus.js to enable live changes to be posted to the database.
+ShipWrecked includes a custom built kanban board to help users keep track of their thread statuses and progress. At the moment, columns are fixed, but in the future will be customisable. This was built using sortable.js and stimulus.js to enable live changes to be posted to the database.
 
 ![image](https://user-images.githubusercontent.com/66081334/125176414-13b26080-e1cb-11eb-8567-dcd6ad99cbbd.png)
 
