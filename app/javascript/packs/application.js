@@ -7,10 +7,10 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-import { pieChart, toggleCheckbox } from '../components/pie';
-import { findSortables } from '../components/sortable';
+import { pieChart, toggleCheckbox } from './components/pie';
+import { findSortables } from './components/sortable';
 import 'controllers'
-import { initChatroomCable } from '../channels/chatroom_channel'
+import { initChatroomCable } from './channels/chatroom_channel'
 
 
 window.addEventListener('turbolinks:load', () => {
