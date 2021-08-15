@@ -61,8 +61,9 @@
 <% unless @all_threads.empty? %>
   <%= form_tag user_character_path(@user, @character),class: "hidden-button",  method: :get do %>
     <%= hidden_field_tag :query, params[:query], value: "All" %>
-    <%= submit_tag "All threads | ", class: "hidden-button" %>
+    <%= submit_tag "All threads ", class: "hidden-button" %>
   <% end %>
+  |
   <%= form_tag user_character_path(@user, @character), class: "hidden-button", method: :get do %>
     <%= hidden_field_tag :query, params[:query], value: "in-progress" %>
     <%= submit_tag "In-progress threads", class: "hidden-button"%>
