@@ -1,17 +1,29 @@
-<div class="container mt-4">
+<div class="container mt-4 mb-5 narrow-container">
+  <h2>Character Creation</h2>
 	<%= simple_form_for([current_user, @character]) do |f| %>
-		<%= f.input :name %>
-		<%= f.input :age %>
-		<%= f.input :gender %>
-		<%= f.input :birthday %>
-		<%= f.input :sexuality %>
+		<div class="row">
+			<%= f.input :name, wrapper_html: {class:"col-6"} %>
+			<%= f.input :age, wrapper_html: {class:"col-6"} %>
+		</div>
+		<div class="row">
+			<%= f.input :gender, wrapper_html: {class:"col-6"} %>
+			<%= f.input :birthday, wrapper_html: {class:"col-6"} %>
+		</div>
+		<div class="row">
+			<%= f.input :sexuality, wrapper_html: {class:"col-6"} %>
+			<%= f.input :relationships, collection: @relations, :label_method => :name, style: "display:inline-block;", wrapper_html: {class:"col-6"} %>
+		</div>
 		<%= f.input :overview %>
-		<%= f.input :positive %>
-		<%= f.input :negative %>
+		<div class="row">
+			<%= f.input :positive, wrapper_html: {class:"col-6"} %>
+			<%= f.input :negative, wrapper_html: {class:"col-6"} %>
+		</div>
 		<%= f.input :personality %>
 		<%= f.input :history %>
 		<%= f.input :other %>
 		<%= f.input :photo, as: :file %>
+		<%=  %>
 		<%= f.submit 'Submit', class: "form-button"  %>
 	<% end %>
 </div>
+

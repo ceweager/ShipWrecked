@@ -6,6 +6,11 @@
   color: $darkpurple;
   padding: 5px 8px;
   border-radius: 50%;
+  transition: 0.2s ease-in-out;
+  &:hover{
+    background-color: $darkpurple;
+    color:$lightpurple;
+  }
 }
 
 .dark-button, .form-button{

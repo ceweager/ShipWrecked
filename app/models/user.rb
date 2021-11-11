@@ -25,6 +25,11 @@ class User < ApplicationRecord
     friendship_invites.find_by(friend_id: user) || friendship_invites.find_by(user: user)
   end
 
+  def friends
+    FriendshipInvite.where('cast(friend_id as text) ILIKE :query OR cast(user_id as text) ILIKE :query',
+                           query: id.to_s).where(friend_confirm: true)
+  end
+
   private
 
   def set_admin_to_false
