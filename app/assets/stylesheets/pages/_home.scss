@@ -1,4 +1,16 @@
 // Specific CSS for your home-page
+a{
+  text-decoration: none;
+  color: $darkpurple;
+  &:hover{
+    color:$purple;
+    text-decoration: none;
+  }
+}
+
+i{
+  transform: scale(70%);
+}
 
 .logo{
   font-family: $logo-font;

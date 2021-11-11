@@ -14,8 +14,10 @@
     <div style="display:flex; flex-wrap:wrap;">
       <% @users.each do |user|%>
         <div class="card d-flex flex-row align-items-center mr-3" style="border-radius:35px;width:47%;">
-          <%= cl_image_tag user.photo.key, class: "small-round-avatar" %>
-          <h3><%= link_to user.username, user_path(user), class: "ml-3 mr-3" %></h3>
+          <% if user.photo.attached? %>
+            <%= cl_image_tag user.photo.key, class: "small-round-avatar" %>
+          <% end %>
+          <h3 class="m-0"><%= link_to user.username, user_path(user), class: "ml-3 mr-3" %></h3>
           <% unless user.invite?(current_user) || current_user.invite?(user) || user == current_user %>
             <%= simple_form_for([user, @friendinvite]) do |f| %>
               <%= f.button :button do %>
@@ -32,7 +34,9 @@
       <div class="rank-box">
         rank 1
       </div>
-      <%= cl_image_tag current_user.photo.key, class: "round-avatar" %>
+      <% if current_user.photo.attached? %>
+        <%= cl_image_tag current_user.photo.key, class: "round-avatar" %>
+      <% end %>
     </div>
     <div class="user-details">
       <h1><%= current_user.username %></h1>
@@ -43,6 +47,13 @@
       <h4>Timezone</h4>
       <h3><%= current_user.timezone %></h3>
       <h4>Preferences</h4>
+      <div style=" display:inline-block;width:250px;">
+        <% unless current_user.preferences.nil? %>
+          <% current_user.preferences.split(",").each do |preference| %>
+            <div class="pref-pill"><%= preference %></div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

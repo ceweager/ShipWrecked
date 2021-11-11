@@ -69,7 +69,7 @@ class CharactersController < ApplicationController
   def create_nil_goal_and_milestone
     @goal = Goal.create(character: @character, goal_name: 'none')
     @milestone = Milestone.create(goal: @goal, milestone_name: 'none')
-    @milestone.photo = 'https://images.unsplash.com/photo-1590272456521-1bbe160a18ce?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+    @milestone.attach('https://images.unsplash.com/photo-1590272456521-1bbe160a18ce?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80')
     @milestone.save
   end
 

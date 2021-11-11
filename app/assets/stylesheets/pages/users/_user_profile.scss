@@ -29,11 +29,14 @@
   background-image: linear-gradient(180deg, $darkpurple 0%, $lightpurple 87.15%);
   box-sizing: border-box;
   padding: 40px 30px;
+  min-width: 20%;
 }
 
 .user-profile-image{
   position: relative;
   margin-bottom: 30px;
+  width: 260px;
+  height: 260px;
   p{
     margin: 10px auto 5px;
     text-align: center;
@@ -58,9 +61,10 @@
     display: inline-block;
     background-color: $lavenderpurple;
     color: $lightpurple;
-    padding: 3px 16px 3px 32px;
+    padding: 3px 25px 3px 25px;
     border-radius: 10px;
     font-weight: bold;
+    text-align: center;
   }
   .round-avatar{
     height: 260px;
