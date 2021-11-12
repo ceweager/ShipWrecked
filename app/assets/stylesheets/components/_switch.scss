@@ -1,9 +1,11 @@
 .switch {
   position: relative;
   display: inline-block;
+  left: -10px;
+  top: -3px;
   width: 100px;
   height: 34px;
-  transform: scale(90%);
+  transform: scale(60%);
 }
 
 .switch input {
