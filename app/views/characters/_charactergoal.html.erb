@@ -1,10 +1,9 @@
 <div class="category justify-content-between">
-  <h2>goals (<%= @goals.count %>)</h2>
+  <h2>goals  (<%= @goals.count %>)</h2>
   <% if @user == current_user %>
     <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_goal_path(@character) %></h2>
   <%end %>
 </div>
-
 <div class="content">
   <div class="goals-leftbox">
     <% @character.goals.each do |goal| %>
@@ -52,7 +51,7 @@
   </div>
 </div>
 
-<div class="category justify-content-between">
+<div class="category justify-content-between mb-0">
   <h2>threads (<%= @all_threads.count %>)</h2>
   <% if @user == current_user %>
     <h2><%= link_to '<i class="fas fa-plus"></i>'.html_safe,  new_character_postthread_path(@character) %></h2>

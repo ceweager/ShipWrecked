@@ -11,8 +11,8 @@
 		</div>
 		<div class="row">
 			<%= f.input :sexuality, wrapper_html: {class:"col-6"} %>
-			<%= f.input :relationships, collection: @relations, :label_method => :name, style: "display:inline-block;", wrapper_html: {class:"col-6"} %>
 		</div>
+		<%= f.input :relationships, collection: @relations, :label_method => :name, style: "display:inline-block;", wrapper_html: {class:"form-group"}, as: :check_boxes, item_wrapper_class:"form-check-inline", input_html: { multiple: true } %>
 		<%= f.input :overview %>
 		<div class="row">
 			<%= f.input :positive, wrapper_html: {class:"col-6"} %>

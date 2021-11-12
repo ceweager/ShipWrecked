@@ -9,6 +9,9 @@
 }
 
 .friend-card-details{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
   h3{
     margin-top: 10px;
     margin-bottom: 0;

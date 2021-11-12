@@ -5,11 +5,12 @@
 .character-right{
 	text-align: center;
 	position:relative;
-	top: -20px;
+	top: -15px;
   display: inline-block;
 	h1{
 	  text-transform:uppercase;
     font-size: 48px;
+		margin-bottom: 0;
 	}
 
 	h5{
@@ -29,12 +30,13 @@
   height: 250px;
   object-fit: cover;
 	border-radius: 50%;
-	border: 4px solid $lavenderpurple;
+	border: 12px solid $lavenderpurple;
 }
 
 .category{
 	display:flex;
-	margin: 40px 0 20px;
+	margin: 60px 0 0px;
+	text-transform: uppercase;
 	justify-content: space-between;
   h2{
 		display: inline-block;
@@ -55,7 +57,7 @@
 .toggle-section{
 	position:relative;
 	top: -20px;
-	width: 1170px;
+	width: 1050px;
 }
 
 .content{
@@ -71,6 +73,7 @@
 		border-radius: 20px;
 		margin-right: 40px;
 		color: $lightpurple;
+		box-shadow: 5px 5px 10px rgba($lavenderpurple, 0.3);
 	}
 
 	.personality-rightbox{
@@ -81,6 +84,7 @@
 		max-height: 380px;
 		border-radius: 20px;
 		overflow-y: auto;
+		box-shadow: 5px 5px 10px rgba($lavenderpurple, 0.3);
 	}
 }
 
@@ -93,6 +97,7 @@
 	border-radius: 20px;
 	margin-right: 40px;
 	margin-bottom: 20px;
+	box-shadow: 5px 5px 10px rgba($lavenderpurple, 0.3);
 	.card-image{
 		width: 100%;
 	    height: 110px;
@@ -121,11 +126,15 @@
 
 .horizontal-cards{
     overflow-x: auto;
+		overflow-y: hidden;
+		max-height: 260px;
     white-space: nowrap;
 }
 .big-card{
   width: 400px;
-  height: 250px;
+  height: 240px;
+	margin-bottom:10px;
+	box-shadow: 5px 5px 10px rgba($lavenderpurple, 0.4);
   .big-image{
 	height:150px;
   }
@@ -137,7 +146,7 @@
   }
   .card-body{
 	width: 400px;
-	height: 100px;
+	height: 90px;
   }
 }
 
@@ -150,6 +159,16 @@
 	width: 100%;
 	border-radius: 20px;
 	overflow-y: auto;
+	box-shadow: 5px 5px 10px rgba($lavenderpurple, 0.3);
+  .full-box::-webkit-scrollbar-track {
+    margin-top: 10px;
+    margin-bottom: 10px;
+	}
+
+	p{
+		padding: 10px 30px;
+		font-size: 14px;
+	}
 }
 
 .goals-leftbox{
@@ -164,11 +183,12 @@
 
 	.goal-card{
 	  display: flex;
-	  width: 500px;
+	  width: 480px;
 	  justify-content: space-between;
 	  border-radius: 10px;
 	  background-color: $lightpurple;
 	  margin-bottom: 20px;
+		box-shadow: 5px 5px 10px rgba($lavenderpurple, 0.4);
 	}
 
 	h4{
@@ -204,14 +224,14 @@
 .thread-card{
   display: flex;
 	align-items: center;
-  width: 1140px;
+  width: 1000px;
   height: 120px;
   margin-bottom: 10px;
   padding: 5px 30px;
   background-image: linear-gradient(270.05deg, $lavenderpurple 19.59%, $darkpurple 66.53%);
   color: $lightpurple;
   border-radius: 20px;
-
+  box-shadow: 5px 5px 10px rgba($lavenderpurple, 0.4);
   h4{
 	margin: 0;
 	padding: 0;
@@ -238,23 +258,7 @@
   padding: 5px;
 }
 
-.small-width{
-  width: 300px;
-	display:flex;
-  flex-wrap: wrap;
-	flex-direction: column;
-  padding: 5px 10px;
-  margin-bottom: 10px;
-  h4{
-	
-	font-size: 18px;
-  }
-  h5{
-	font-size: 14px;
-  }
-
-  .align-right{
-    font-size: 12px;
-  }
+.scroll-box{
+	overflow-y: auto;
+	height: 100%;
 }
-

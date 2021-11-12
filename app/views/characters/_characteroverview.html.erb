@@ -52,10 +52,13 @@
         <% end %>
       </div>
       <div class="content full-box">
+        <div class="scroll-box">
         <% paragraphs = @character.history.lines %>
           <% paragraphs.each do |paragraph| %>
              <p><%= paragraph %></p>
+             <hr style="width:50%; border: 1px solid rgba(0,0,0,0.2);">
         <% end %>
+        </div>
       </div>
     </div>
     <div class="overview">

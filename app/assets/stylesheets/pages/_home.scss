@@ -8,10 +8,6 @@ a{
   }
 }
 
-i{
-  transform: scale(70%);
-}
-
 .logo{
   font-family: $logo-font;
   font-size: 30px;
@@ -40,9 +36,13 @@ i{
 .narrow-container{
   width: 70%;
 }
-
+.message-container{
+  width: 100%;
+  align-items:flex-start;
+}
 .message-background{
   background-color: $lightpurple;
+  width: 100%;
   padding: 10px 20px 4px;
   border-radius:20px;
   margin-bottom: 20px;
